@@ -25,6 +25,7 @@ class ProductTransaction extends Model
         'grand_total_amount',
         'discount_amount',
         'is_paid',
+        'shirt_id',
         'shirt_size',
         'promo_code_id',
         'proof',
