@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Shirt;
@@ -184,6 +185,7 @@ class ProductTransactionResource extends Resource
         return $table
             ->columns([
                 //
+
                 Tables\Columns\ImageColumn::make('shirt.thumbnail'),
 
                 Tables\Columns\TextColumn::make('name')
