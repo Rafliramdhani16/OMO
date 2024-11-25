@@ -24,6 +24,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('shirt_size');
 
+            $table->text('address');
+            
             $table->unsignedBigInteger('quantity');
             $table->unsignedBigInteger('sub_total_amount');
             $table->unsignedBigInteger('grand_total_amount');

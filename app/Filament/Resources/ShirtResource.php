@@ -86,7 +86,7 @@ class ShirtResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('category_name'),
+                Tables\Columns\TextColumn::make('category.name'),
                 Tables\Columns\ImageColumn::make('thumbnail'),
                 Tables\Columns\IconColumn::make('is_popular')
                     ->boolean()

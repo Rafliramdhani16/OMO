@@ -24,6 +24,14 @@ class PromoCodeResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('code')
+                ->required()
+                ->maxLength(255),
+
+                Forms\Components\TextInput::make('discount_amount')
+                ->required()
+                ->numeric()
+                ->prefix('IDR')
             ]);
     }
 
@@ -32,6 +40,8 @@ class PromoCodeResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('code')
+                ->searchable(),
             ])
             ->filters([
                 //
