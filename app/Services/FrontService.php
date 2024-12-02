@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -17,7 +17,8 @@ class FrontService
         $this->shirtRepository = $shirtRepository;
     }
 
-    public function searchByName(string $keyword){
+    public function searchByName(string $keyword)
+    {
         return $this->shirtRepository->searchByName($keyword);
     }
 
