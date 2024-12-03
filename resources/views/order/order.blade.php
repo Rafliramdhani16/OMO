@@ -17,6 +17,6 @@
         </div>
         @livewire('order-form', ['shirt' => $shirt, 'orderData' => $orderData])
       </div>
-      <script src="{{asset('js/booking.js')}}"></script>
+    {{-- <script src="asset('js/booking.js')"></script> }}}"></script> --}}
     </body>
 </html>

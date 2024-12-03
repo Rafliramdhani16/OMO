@@ -4,7 +4,7 @@
       src="{{Storage::url($shirt->photos()->latest()->first()->photo)}}"
       class="w-full h-full object-contain object-center" alt="thumbnail" />
   </div>
-  <form action="customer-data.html" class="flex flex-col gap-5">
+  <form class="flex flex-col gap-5">
     <div class="flex flex-col rounded-[20px] p-4 mx-4 pb-5 gap-5 bg-white">
       <div id="info" class="flex items-center justify-between">
         <div class="flex flex-col">
@@ -41,15 +41,19 @@
     <p class="font-semibold">Quantity</p>
     <div class="relative flex items-center gap-[30px]">
 
-        <button type="button" class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#2A2A2A] overflow-hidden">
+        <button wire:click="decrementQuantity" type="button" class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#2A2A2A] overflow-hidden">
             <span class="font-bold text-xl leading-[30px] text-white">-</span>
         </button>
 
-        <p id="quantity-display" class="font-bold text-xl leading-[30px]">1</p>
+        <p id="quantity-display" class="font-bold text-xl leading-[30px]">
+          {{ $quantity }}
+        </p>
         <input type="number" wire:model.live.debounce.500ms="quantity" name="quantity" id="quantity" value="1" class="sr-only -z-10">
-        <button type="button" class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#C5F277] overflow-hidden">
+
+        <button wire:click="incrementQuantity" type="button" class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#C5F277] overflow-hidden">
             <span class="font-bold text-xl leading-[30px]">+</span>
                 </button>
+                
               </div>
           </div>
           <div class="flex flex-col gap-2">
@@ -71,7 +75,7 @@
         <hr class="border-[#EAEAED]">
         <div class="flex items-center justify-between">
             <p class="font-semibold">Sub Total</p>
-            <p id="total-price" class="font-bold"></p>
+            <p id="total-price" class="font-bold">Rp {{number_format($grandTotalAmount, 0, ',', '.')}}</p>
         </div>
         <div class="flex items-center justify-between">
             <p class="font-semibold">Discount</p>
