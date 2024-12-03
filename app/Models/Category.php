@@ -19,7 +19,7 @@ class Category extends Model
         'icon',
     ];
 
-    public function shirts():HasMany
+    public function shirts(): HasMany
     {
         return $this->hasMany(Shirt::class);
     }
