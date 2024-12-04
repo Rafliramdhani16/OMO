@@ -71,6 +71,6 @@ class OrderController extends Controller
 
     public function orderFinished(ProductTransaction $productTransaction)
     {
-        dd($productTransaction);
+        return view('order.order_finished', compact('productTransaction'));
     }
 }

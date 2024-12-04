@@ -79,7 +79,7 @@
                         <div class="flex items-center justify-between rounded-full bg-[#2A2A2A] p-[10px] pl-6">
                             <div class="flex flex-col gap-[2px]">
                                 <p id="grand-total" class="font-bold text-[20px] leading-[30px] text-white">
-                                  Rp {{number_format['grand_total_amount'], 0, ',', '.')}}
+                                  Rp {{number_format($orderData['grand_total_amount'], 0, ',', '.')}}
                                 </p>
                                 <p class="text-sm leading-[21px] text-[#878785]">Grand total</p>
                             </div>
