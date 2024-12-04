@@ -79,7 +79,7 @@
         </div>
         <div class="flex items-center justify-between">
             <p class="font-semibold">Discount</p>
-            <p id="discount" class="font-bold text-[#FF1943]">- Rp {{ $discount }}</p>
+            <p id="discount" class="font-bold text-[#FF1943]">- Rp {{number_format($discount, 0, ',', '.')}}</p>
         </div>
     </div>
 <div id="bottom-nav" class="relative flex h-[100px] w-full shrink-0 mt-5">
