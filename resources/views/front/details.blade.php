@@ -12,7 +12,7 @@
 <body>
   <div class="relative flex flex-col w-full max-w-[640px] min-h-screen gap-5 mx-auto bg-[#F5F5F0]">
     <div id="top-bar" class="flex justify-between items-center px-4 mt-[60px]">
-      <a href="index.html">
+      <a href="{{ route('front.index') }}">
         <img src="{{asset('assets/images/icons/back.svg')}}" class="w-10 h-10" alt="icon">
       </a>
       <p class="font-bold text-lg leading-[27px]">Look Details</p>

@@ -129,6 +129,8 @@ class OrderService
                 $newTransaction = $this->orderRepository->createTransaction($validated);
 
                 $productTransactionId = $newTransaction->id;
+
+                $this->orderRepository->clearSession();
             });
         } catch (\Exception $e) {
             Log::error('Error in payment confirmation: ' . $e->getMessage());
