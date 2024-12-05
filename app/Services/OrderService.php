@@ -33,11 +33,16 @@ class OrderService
     {
         $orderData = [
             'shirt_size' => $data['shirt_size'],
-            'size_id' => $data['size_id'], 
+            'size_id' => $data['size_id'],
             'shirt_id' => $data['shirt_id'],
         ];
 
         $this->orderRepository->saveToSession($orderData);
+    }
+
+    public function getMyOrderDetails(array $validated)
+    {
+        return $this->orderRepository->findByTrxIdAndPhoneNumber($validated['booking_trx_id'], $validated['phone']);
     }
 
     public function getOrderDetails()
@@ -54,7 +59,7 @@ class OrderService
         $grandTotalAmount = $subTotalAmount + $totalTax;
 
         $orderData['sub_total_amount'] = $subTotalAmount;
-        $orderData['total_tax'] = $totalTax; 
+        $orderData['total_tax'] = $totalTax;
         $orderData['grand_total_amount'] = $grandTotalAmount;
 
         return compact('orderData', 'shirt');
@@ -65,8 +70,8 @@ class OrderService
         $promo = $this->promoCodeRepository->findByCode($code);
 
         if ($promo) {
-            $discount = $promo->discount_amount; 
-            $grandTotalAmount = $subTotalAmount - $discount; 
+            $discount = $promo->discount_amount;
+            $grandTotalAmount = $subTotalAmount - $discount;
             $promoCodeId = $promo->id;
 
             return [
@@ -95,8 +100,8 @@ class OrderService
         $productTransactionId = null;
 
         try { // closure based transaction
-            DB::transaction(function() use ($validated, &$productTransactionId, $orderData) {
-                
+            DB::transaction(function () use ($validated, &$productTransactionId, $orderData) {
+
                 if (isset($validated['proof'])) {
                     $proofPath = $validated['proof']->store('proofs', 'public');
                     // buktiransfer.png
@@ -122,7 +127,7 @@ class OrderService
                 $validated['booking_trx_id'] = ProductTransaction::generateUniqueTrxId();
 
                 $newTransaction = $this->orderRepository->createTransaction($validated);
-                
+
                 $productTransactionId = $newTransaction->id;
             });
         } catch (\Exception $e) {
