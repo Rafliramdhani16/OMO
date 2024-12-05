@@ -8,9 +8,9 @@
     </head>
     <body>
         <form method="POST" enctype="multipart/form-data" action="{{ route('front.payment_confirm') }}" class="relative flex flex-col w-full max-w-[640px] min-h-screen gap-5 mx-auto bg-[#F5F5F0]">
-          @csrf
+        @csrf
             <div id="top-bar" class="flex justify-between items-center px-4 mt-[60px]">
-                <a href="customer-data.html">
+                <a href="{{ route('front.customer_data') }}">
                     <img src="{{asset('assets/images/icons/back.svg')}}" class="w-10 h-10" alt="icon">
                 </a>
                 <p class="font-bold text-lg leading-[27px]">Review & Payment</p>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <p class="font-semibold">Promo Code</p>
-                    <p class="font-bold">BELANJA</p>
+                    <p class="font-bold">{{ $orderData('promo_code') }}</p>
                 </div>
                 <div class="flex items-center justify-between">
                     <p class="font-semibold">Discount</p>

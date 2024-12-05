@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories\Contracts;
 
@@ -10,4 +10,5 @@ interface OrderRepositoryInterface
     public function saveToSession(array $data);
     public function updateSessionData(array $data);
     public function getOrderDataFormSession();
+    public function clearSession();
 }
