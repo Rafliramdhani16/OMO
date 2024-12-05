@@ -143,7 +143,7 @@
                             <span class="font-bold text-sm leading-[21px]">Browse</span>
                         </div>
                     </a>
-                    <a href="check-booking.html" class="mx-auto w-full">
+                    <a href="{{ route('front.check_booking') }}" class="mx-auto w-full">
                         <img src="{{asset('assets/images/icons/bag-2-white.svg')}}" class="w-6 h-6" alt="icon">
                     </a>
                     <a href="#" class="mx-auto w-full">
