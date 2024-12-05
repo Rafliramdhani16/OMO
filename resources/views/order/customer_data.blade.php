@@ -9,7 +9,7 @@
     <body>
         <div class="relative flex flex-col w-full max-w-[640px] min-h-screen gap-5 mx-auto bg-[#F5F5F0]">
             <div id="top-bar" class="flex justify-between items-center px-4 mt-[60px]">
-                <a href="booking.html">
+                <a href="{{ route('front.booking') }}">
                     <img src="{{asset('assets/images/icons/back.svg')}}" class="w-10 h-10" alt="icon">
                 </a>
                 <p class="font-bold text-lg leading-[27px]">Delivery</p>
@@ -21,10 +21,10 @@
                 </div>
                 <div class="flex flex-col w-full">
                     <h1 id="title" class="font-bold text-lg leading-6">
-                      {{ $shirt->name }}
+                    {{ $shirt->name }}
                     </h1>
                     <p class="font-semibold text-sm leading-[21px]">
-                      {{ $orderData['shirt_size'] }} • {{ $orderData['quantity'] }}</p>
+                    {{ $orderData['shirt_size'] }} • {{ $orderData['quantity'] }}</p>
                 </div>
                 <div class="flex items-center shrink-0 gap-1">
                     <img src="{{asset('assets/images/icons/Star 1.svg')}}" class="w-[22px] h-[22px]" alt="star">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <form action="{{ route('front.save_customer_data') }}" method="POST" class="flex flex-col gap-5">
-              @csrf
+            @csrf
                 <div class="flex flex-col rounded-[20px] p-4 mx-4 pb-5 gap-5 bg-white">
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
