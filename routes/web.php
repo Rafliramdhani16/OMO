@@ -9,6 +9,9 @@ Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/browse/{category:slug}', [FrontController::class, 'category'])->name('front.category');
 Route::get('/details/{shirt:slug}', [FrontController::class, 'details'])->name('front.details');
 
+Route::get('/check-booking', [OrderController::class, 'checkBooking'])->name('front.check_booking');
+Route::post('/check-booking/details', [OrderController::class, 'checkBookingDetails'])->name('front.check_booking_details');
+
 Route::post('/order/begin/{shirt:slug}', [OrderController::class, 'saveOrder'])->name('front.save_order');
 Route::get('/order/booking/', [OrderController::class, 'booking'])->name('front.booking');
 Route::get('/order/booking/customer-data', [OrderController::class, 'customerData'])->name('front.customer_data');

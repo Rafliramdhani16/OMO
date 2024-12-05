@@ -12,7 +12,7 @@ class ProductTransaction extends Model
     //
     use HasFactory, SoftDeletes;
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'phone',
         'email',
@@ -34,19 +34,25 @@ class ProductTransaction extends Model
     public static function generateUniqueTrxId()
     {
         $prefix = "OMO_TRX";
-        do{
+        do {
             $randomString = $prefix . mt_rand(1000, 9999);
             // mengecek apakah dari nomor randomnya sudah ada atau belum karena tidak bole sama 
-        }while(self::where('booking_trx_id', $randomString)->exists());
+        } while (self::where('booking_trx_id', $randomString)->exists());
 
         return $randomString;
     }
 
-    public function shirt():BelongsTo
+    public function shirt(): BelongsTo
     {
         return $this->belongsTo(Shirt::class, 'shirt_id');
     }
-    public function promoCode():BelongsTo
+
+    public function shirtSize(): BelongsTo
+    {
+        return $this->belongsTo(ShirtSize::class, 'shirt_size');
+    }
+
+    public function promoCode(): BelongsTo
     {
         return $this->belongsTo(PromoCode::class, 'promo_code_id');
     }
