@@ -14,7 +14,7 @@
                 </div>
                 <div class="flex flex-col w-full max-w-[340px] rounded-[20px] p-[20px_16px_30px_16px] gap-[30px] bg-white">
                     <div class="flex flex-col text-center gap-[10px]">
-                        <h1 class="font-bold text-xl leading-[30px]">New Shoes Coming!</h1>
+                        <h1 class="font-bold text-xl leading-[30px]">New Shirt Coming!</h1>
                         <p class="leading-[30px]">Kami akan memeriksa pesanan anda silahkan cek order secara berkala</p>
                     </div>
                     <div class="flex items-center justify-between rounded-2xl border-2 border-[#FFC700] border-dashed p-[12px_16px]">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="flex flex-col gap-3">
                         <a href="{{ route('front.index') }}" class="rounded-full p-[12px_20px] text-center w-full bg-[#C5F277] font-bold">Order More</a>
-                        <a href="{{ route('front.check_booking_details') }}" class="rounded-full p-[12px_20px] text-center w-full bg-[#090917] font-bold text-white">View Booking</a>
+                        <a href="{{ route('front.check_booking') }}" class="rounded-full p-[12px_20px] text-center w-full bg-[#090917] font-bold text-white">View Booking</a>
                     </div>
                 </div>
             </div>
