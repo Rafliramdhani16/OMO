@@ -75,7 +75,7 @@
         <hr class="border-[#EAEAED]">
         <div class="flex items-center justify-between">
             <p class="font-semibold">Sub Total</p>
-            <p id="total-price" class="font-bold">Rp {{number_format($grandTotalAmount, 0, ',', '.')}}</p>
+            <p id="total-price" class="font-bold">Rp {{number_format($subTotalAmount, 0, ',', '.')}}</p>
         </div>
         <div class="flex items-center justify-between">
             <p class="font-semibold">Discount</p>

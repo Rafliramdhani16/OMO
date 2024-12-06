@@ -23,7 +23,7 @@ function updateDisplay(quantity) {
     quantityInput.value = quantity;
     quantityDisplay.textContent = quantity;
     const totalPrice = quantity * defaultPrice;
-    totalPriceDisplay.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
+    // totalPriceDisplay.textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
     // const grandTotal = totalPrice - discount;
     // grandTotalDisplay.textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
 }

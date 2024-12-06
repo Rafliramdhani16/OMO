@@ -10,7 +10,7 @@
         <div class="relative flex flex-col w-full max-w-[640px] min-h-screen gap-5 mx-auto bg-[#F5F5F0]">
             <div class="flex flex-col items-center justify-center px-4 gap-[30px] my-auto">
                 <form method="POST" action="{{ route('front.check_booking_details') }}" class="flex flex-col w-full max-w-[330px] rounded-[30px] p-5 gap-6 bg-white">
-                  @csrf
+                @csrf
                     <img src="{{asset('assets/images/icons/3d-cube-search.svg')}}" class="w-[90px] h-[90px] mx-auto" alt="icon">
                     <h1 class="font-bold text-2xl leading-9 text-center">Check My Order</h1>
                     <div class="flex flex-col gap-2">

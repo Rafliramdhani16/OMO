@@ -72,7 +72,7 @@
           @foreach ($shirt->sizes as $itemSize)
 
           <label class="relative flex justify-center min-w-[83px] w-fit rounded-2xl ring-1 ring-[#2A2A2A] p-[14px] transition-all duration-300 has-[:checked]:bg-white has-[:checked]:ring-2 has-[:checked]:ring-[#FFC700] hover:ring-2 hover:ring-[#FFC700]">
-            <input type="radio" data-size-id="{{ $size->id }}" value="{{ $itemSize->size }}" name="shirt_size" value="EU 40" class="absolute top-1/2 left-1/2 opacity-0" required>
+            <input type="radio" data-size-id="{{ $itemSize->id }}" value="{{ $itemSize->size }}" name="shirt_size" value="EU 48" class="absolute top-1/2 left-1/2 opacity-0" required>
             <span class="font-semibold">{{ $itemSize->size }}</span>
           </label>
           @endforeach
