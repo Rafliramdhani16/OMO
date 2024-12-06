@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
-use App\Repositories\CategoryRepository;
-use App\Repositories\Contracts\CategoryRepositoryInterface;
-use App\Repositories\Contracts\OrderRepositoryInterface;
-use App\Repositories\Contracts\PromoCodeRepositoryInterface;
-use App\Repositories\Contracts\ShirtRepositoryInterface;
+use App\View\Components\AppLayout;
 use App\Repositories\OrderRepository;
 use App\Repositories\ShirtRepository;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use PromoCodeRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\PromoCodeRepository;
+use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Contracts\ShirtRepositoryInterface;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\PromoCodeRepositoryInterface;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        Blade::component('app-layout', AppLayout::class);
     }
 }
