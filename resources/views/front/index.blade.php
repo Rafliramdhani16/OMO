@@ -35,7 +35,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
 
-            @forelse ( $categories as $itemCategory )
+            @forelse ( $category as $itemCategory )
             <a href="{{ route('front.category', $itemCategory->slug) }}">
                 <div class="flex items-center justify-between w-full rounded-2xl overflow-hidden bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700]">
                     <div class="flex flex-col gap-[2px] px-[14px]">
@@ -64,7 +64,7 @@
             <div class="swiper w-full overflow-hidden">
                 <div class="swiper-wrapper">
                     
-                    @forelse ($popularShirts as $itemPopularShirt)
+                    @forelse ($popularShirt as $itemPopularShirt)
                     <div class="swiper-slide !w-fit py-[2px]">
                         <a href="{{ route('front.details', $itemPopularShirt->slug) }}">
                             <div class="flex flex-col shrink-0 w-[230px] h-full rounded-3xl gap-[14px] p-[10px] pb-4 bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700]">
@@ -104,7 +104,7 @@
             </div>
             <div class="flex flex-col gap-4">
 
-                @forelse ($newShirts as $itemNewShirt)
+                @forelse ($newShirt as $itemNewShirt)
                 <a href="{{ route('front.details', $itemPopularShirt->slug) }}">
                     <div class="flex items-center rounded-3xl p-[10px_16px_16px_10px] gap-[14px] bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FFC700]">
                         <div class="w-20 h-20 flex shrink-0 rounded-2xl bg-[#D9D9D9] overflow-hidden">

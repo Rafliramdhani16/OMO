@@ -26,7 +26,7 @@
                         <img src="{{Storage::url($orderDetails->shirt->photos()->latest()->first()->photo)}}" class="w-full h-full object-contain" alt="">
                     </div>
                     <h3 class="font-bold text-lg leading-6">
-                      {{ $orderDetails->shirt->name }}
+                    {{ $orderDetails->shirt->name }}
                     </h3>
                 </div>
                 <hr class="border-[#EAEAED]">
@@ -43,13 +43,13 @@
                     <p class="font-bold">{{ $orderDetails->quantity }}</p>
                 </div>
                 <div class="flex items-center justify-between">
-                    <p class="font-semibold">Shoe Size</p>
+                    <p class="font-semibold">Shirt Size</p>
                     <p class="font-bold">{{ $orderDetails->shirtSize->size }}</p>
                 </div>
                 <div class="flex items-center justify-between">
                     <p class="font-semibold">Grand Total</p>
                     <p class="font-bold text-2xl leading-9 text-[#07B704]">
-                      Rp {{number_format($orderDetails->grand_total_amount, 0, ',', '.')}}
+                    Rp {{number_format($orderDetails->grand_total_amount, 0, ',', '.')}}
                     </p>
                 </div>
                 <div class="flex items-center justify-between">
@@ -59,12 +59,12 @@
                 @if ($orderDetails->is_paid)
                 <div class="flex items-center justify-between">
                     <p class="font-semibold">Status</p>
-                    <p class="rounded-full p-[6px_14px] bg-[#2A2A2A] font-bold text-sm leading-[21px] text-white">PENDING</p>
+                    <p class="rounded-full p-[6px_14px] bg-[#2A2A2A] font-bold text-sm leading-[21px] text-white">SUCCESS</p>
                 </div>
                 @else
                 <div class="flex items-center justify-between">
                     <p class="font-semibold">Status</p>
-                    <p class="rounded-full p-[6px_14px] bg-[#07B704] font-bold text-sm leading-[21px] text-white">SUCCESS</p>
+                    <p class="rounded-full p-[6px_14px] bg-[#07B704] font-bold text-sm leading-[21px] text-white">PENDING</p>
                 </div>
                 @endif
             </section>

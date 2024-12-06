@@ -22,7 +22,7 @@
                         <p class="text-[#878785]">{{ $category->shirts->count() }} Shirts</p>
                     </div>
                     <div class="flex shrink-0 w-[140px] h-[120px] overflow-hidden">
-                        <img src="{{ Storage::url$category->icon }}" class="w-full h-full object-cover object-left" alt="thumbnail">
+                        <img src="{{ Storage::url($category->icon) }}" class="w-full h-full object-cover object-left" alt="thumbnail">
                     </div>
                 </div>
             </div>
