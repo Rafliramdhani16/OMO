@@ -16,14 +16,12 @@
     <!-- Product Details -->
     <div class="max-w-7xl mx-auto px-4 mt-6">
         <div class="grid md:grid-cols-2 gap-8">
-            <!-- Image Gallery - Ukuran dikurangi -->
             <div class="space-y-3">
                 <div class="aspect-[4/3] bg-white rounded-2xl overflow-hidden">
                     <img id="mainImage" src="{{ asset($shirt->thumbnail) }}" 
                          class="w-full h-full object-contain" 
                          alt="{{ $shirt->name }}">
                 </div>
-                <!-- Thumbnail Gallery - Ukuran dikurangi -->
                 <div class="grid grid-cols-6 gap-2">
                     @foreach($shirt->photos as $photo)
                     <button onclick="updateMainImage('{{ asset($photo->photo) }}')" 
@@ -42,7 +40,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <h1 class="text-2xl font-bold text-gray-900">{{ $shirt->name }}</h1>
-                            <p class="mt-2 text-xl font-semibold text-blue-600">
+                            <p class="mt-2 text-xl font-semibold text-slate-600">
                                 Rp {{ number_format($shirt->price, 0, ',', '.') }}
                             </p>
                         </div>
@@ -80,64 +78,78 @@
 
                 <!-- Size Selection -->
                 <form action="{{ route('front.save_order', $shirt->slug) }}" method="POST" class="py-4">
-                    @csrf
-                    <h2 class="text-lg font-semibold mb-3">Pilih Ukuran</h2>
-                    <div class="flex flex-wrap gap-2">
-                        @foreach($shirt->sizes as $itemSize)
-                        <label class="relative">
-                            <input type="radio" 
-                                   name="shirt_size" 
-                                   value="{{ $itemSize->size }}"
-                                   data-size-id="{{ $itemSize->id }}"
-                                   class="peer hidden" 
-                                   required>
-                            <div class="w-14 h-14 flex items-center justify-center rounded-xl border-2 cursor-pointer
-                                     peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:border-blue-600 transition-all">
-                                <span class="text-sm font-medium">{{ $itemSize->size }}</span>
-                            </div>
-                        </label>
-                        @endforeach
-                        <input type="hidden" name="size_id" id="size_id">
-                    </div>
-
-                    <!-- Add to Cart Button -->
-                    <div class="fixed bottom-0 left-0 right-0 bg-white border-t md:relative md:border-t-0 md:bg-transparent md:mt-6">
-                        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-                            <div>
-                                <p class="text-xl font-bold text-gray-900">
-                                    Rp {{ number_format($shirt->price, 0, ',', '.') }}
-                                </p>
-                                <p class="text-xs text-gray-500">Harga sudah termasuk pajak</p>
-                            </div>
-                            <button type="submit" 
-                                    class="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors">
-                                Beli Sekarang
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-@push('scripts')
-<script>
-function updateMainImage(src) {
-    document.getElementById('mainImage').src = src;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const sizeRadios = document.querySelectorAll('input[name="shirt_size"]');
-    const sizeIdInput = document.getElementById('size_id');
-
-    sizeRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            const selectedSizeId = this.getAttribute('data-size-id');
-            sizeIdInput.value = selectedSizeId;
-        });
-    });
-});
-</script>
-@endpush
-@endsection
+                  @csrf
+                  <h2 class="text-lg font-semibold mb-3">Pilih Ukuran</h2>
+                  <div class="flex flex-wrap gap-2">
+                      @foreach($shirt->sizes as $itemSize)
+                      <label class="relative">
+                          <input type="radio" 
+                                 name="shirt_size" 
+                                 value="{{ $itemSize->size }}"
+                                 data-size-id="{{ $itemSize->id }}"
+                                 class="peer hidden" 
+                                 required>
+                          <div class="w-14 h-14 flex items-center justify-center rounded-xl border-2 cursor-pointer
+                                   peer-checked:border-blue-600 peer-checked:bg-blue-50 hover:border-blue-600 transition-all">
+                              <span class="text-sm font-medium">{{ $itemSize->size }}</span>
+                          </div>
+                      </label>
+                      @endforeach
+                      <input type="hidden" name="size_id" id="size_id">
+                  </div>
+      
+                  @error('shirt_size')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                  @enderror
+                  @error('size_id')
+                      <span class="text-red-500 text-sm">{{ $message }}</span>
+                  @enderror
+      
+                  <!-- Add to Cart Button -->
+                  <div class="fixed bottom-0 left-0 right-0 bg-white border-t md:relative md:border-t-0 md:bg-transparent md:mt-6">
+                      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+                          <div>
+                              <p class="text-xl font-bold text-gray-900">
+                                  Rp {{ number_format($shirt->price, 0, ',', '.') }}
+                              </p>
+                              <p class="text-xs text-gray-500">Harga sudah termasuk pajak</p>
+                          </div>
+                          <button type="submit" 
+                                  class="px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors">
+                              Beli Sekarang
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      
+      @push('scripts')
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const form = document.querySelector('form');
+          const sizeRadios = document.querySelectorAll('input[name="shirt_size"]');
+          const sizeIdInput = document.getElementById('size_id');
+      
+          sizeRadios.forEach(radio => {
+              radio.addEventListener('change', function() {
+                  const selectedSizeId = this.getAttribute('data-size-id');
+                  sizeIdInput.value = selectedSizeId;
+              });
+          });
+      
+          form.addEventListener('submit', function(e) {
+              const selectedSize = document.querySelector('input[name="shirt_size"]:checked');
+              if (!selectedSize) {
+                  e.preventDefault();
+                  alert('Silakan pilih ukuran terlebih dahulu');
+                  return;
+              }
+              
+              // Set size_id before submission
+              sizeIdInput.value = selectedSize.getAttribute('data-size-id');
+          });
+      });
+      </script>
+      @endpush
+      @endsection

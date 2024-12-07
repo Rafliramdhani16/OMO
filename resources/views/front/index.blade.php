@@ -6,7 +6,7 @@
     <div class="max-w-7xl mx-auto px-4 py-16">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div>
-                <span class="inline-block px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">Koleksi Baru</span>
+            
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
                     Temukan Gayamu dengan Koleksi Terbaru Kami
                 </h1>

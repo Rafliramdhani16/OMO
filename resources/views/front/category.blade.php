@@ -13,11 +13,10 @@
         <!-- Category Banner -->
         <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
             <div class="flex flex-col md:flex-row">
-                <!-- Category Image - Full Height with Zoom Out -->
                 <div class="md:w-1/2 h-48 md:h-[450px] relative overflow-hidden">
                     <img src="{{ asset($category->icon) }}" 
-                         class="w-full h-[130%] object-cover object-center" 
-                         alt="{{ $category->name }}">
+                        class="w-full h-[130%] object-cover object-center" 
+                        alt="{{ $category->name }}">
                     <div class="absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-white/10"></div>
                 </div>
                 <!-- Category Info -->
