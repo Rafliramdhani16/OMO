@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+namespace App\Repositories;  
 
 use App\Models\PromoCode;
 use App\Repositories\Contracts\PromoCodeRepositoryInterface;
