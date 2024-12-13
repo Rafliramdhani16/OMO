@@ -1,70 +1,96 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Masuk</title>
+        <title>OMO! Login</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
             rel="stylesheet"
         />
         <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
             rel="stylesheet"
         />
         <style>
             body {
                 font-family: "Poppins", sans-serif;
             }
+            .hoverable-link:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
         </style>
     </head>
-    <body class="bg-gray-100">
-        <div class="flex min-h-screen items-center justify-center p-4">
-            <div
-                class="bg-white rounded-lg shadow-lg flex flex-col md:flex-row max-w-4xl w-full"
-            >
-                <div class="md:w-1/2">
-                    <img
-                        class="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-                        src="C:\Kelompok1\OMO\public\image\LOOK1.jpg"
-                    />
-                </div>
-                <div class="md:w-1/2 p-8">
-                    <h1 class="text-5xl font-bold mb-4">OMO !</h1>
-                    <p class="text-lg mb-6">Masuk ke OMO !</p>
+    <body class="flex items-center justify-center min-h-screen">
+        <div class="flex flex-col md:flex-row w-full h-full">
+            <div class="hidden lg:block lg:w-1/2 h-full">
+                <img
+                    class="w-full h-full object-cover"
+                    height="800"
+                    src="C:\Kelompok1\OMO\public\image\LOOK1.jpg"
+                    width="600"
+                />
+            </div>
+            <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+                <div class="w-full max-w-md">
+                    <h1 class="text-4xl font-bold mb-4">OMO !</h1>
+                    <p class="mb-6">Masuk ke OMO !</p>
                     <form>
                         <div class="mb-4">
                             <input
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
                                 placeholder="Email"
                                 type="email"
                             />
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-4 relative">
                             <input
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                id="password"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
                                 placeholder="Password"
                                 type="password"
                             />
+                            <i
+                                id="togglePassword"
+                                class="fas fa-eye absolute right-4 top-2.5 text-gray-500 cursor-pointer"
+                            ></i>
                         </div>
                         <button
-                            class="w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800"
                             type="submit"
+                            class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
                         >
                             Masuk
                         </button>
                     </form>
-                    <div class="flex justify-between items-center mt-4">
-                        <a class="text-blue-500 hover:underline" href="#"
+                    <div class="flex justify-between mt-4">
+                        <a class="text-blue-600 hoverable-link" href="#"
                             >Daftar Sekarang</a
                         >
-                        <a class="text-blue-500 hover:underline" href="#"
+                        <a class="text-blue-600 hoverable-link" href="#"
                             >Lupa Password</a
                         >
                     </div>
-                    <p class="text-right text-gray-500 mt-20">OMO!</p>
+                    <p class="mt-8 text-gray-500 text-center">
+                        OhMyOutfit! | Copyright 2024
+                    </p>
                 </div>
             </div>
         </div>
+
+        <script>
+            const togglePassword = document.getElementById("togglePassword");
+            const password = document.getElementById("password");
+
+            togglePassword.addEventListener("click", function () {
+                const type =
+                    password.getAttribute("type") === "password"
+                        ? "text"
+                        : "password";
+                password.setAttribute("type", type);
+                this.classList.toggle("fa-eye-slash");
+            });
+        </script>
     </body>
 </html>
