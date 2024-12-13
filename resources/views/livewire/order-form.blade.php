@@ -30,7 +30,7 @@
                     <img src="{{asset('assets/images/icons/user.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
                     <input wire:model="name" type="text" name="name" id="name" 
                            class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Type your complete name">
+                        placeholder="Type your complete name">
                 </div>
                 @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>

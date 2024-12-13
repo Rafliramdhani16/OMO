@@ -14,7 +14,7 @@
         <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-8">
             <div class="flex flex-col md:flex-row">
                 <div class="md:w-1/2 h-48 md:h-[450px] relative overflow-hidden">
-                    <img src="{{ asset($category->icon) }}" 
+                    <img src="{{ asset('storage/' . $category->icon) }}" 
                         class="w-full h-[130%] object-cover object-center" 
                         alt="{{ $category->name }}">
                     <div class="absolute inset-0 bg-gradient-to-r from-black/5 via-transparent to-white/10"></div>
@@ -91,7 +91,7 @@
                 <a href="{{ route('front.details', $itemShirt->slug) }}" 
                    class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                     <div class="relative aspect-square">
-                        <img src="{{ asset($itemShirt->thumbnail) }}" 
+                        <img src="{{ asset('storage/' . $itemShirt->thumbnail) }}" 
                              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" 
                              alt="{{ $itemShirt->name }}">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>

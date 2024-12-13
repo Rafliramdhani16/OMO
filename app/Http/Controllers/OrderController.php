@@ -19,10 +19,11 @@ class OrderController extends Controller
     protected $orderService;
     public function __construct(OrderService $orderService)
     {
-        $this->orderService = $orderService;
+        // $this->orderService = $orderService;
     }
     public function saveOrder(StoreOrderRequest $request, Shirt $shirt)
     {
+        dd($request);
         //proses penyimpanan ke session
         $validated = $request->validated();
 
@@ -36,6 +37,7 @@ class OrderController extends Controller
     public function booking()
     {
         $data = $this->orderService->getOrderDetails();
+        dd($data);
         return view('order.order', $data);
     }
 
