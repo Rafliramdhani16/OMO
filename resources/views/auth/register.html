@@ -1,15 +1,15 @@
-<html lang="id">
+<!DOCTYPE html>
+<html>
     <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>Daftar</title>
+        <title>OMO! Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
         <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
             rel="stylesheet"
         />
         <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
             rel="stylesheet"
         />
         <style>
@@ -18,66 +18,120 @@
             }
         </style>
     </head>
-    <body class="bg-gray-100">
-        <div class="flex justify-center items-center min-h-screen">
-            <div
-                class="bg-white shadow-md rounded-lg flex flex-col md:flex-row w-full max-w-4xl"
-            >
-                <div class="md:w-1/2">
-                    <img
-                        class="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-                        src="C:\Kelompok1\OMO\public\image\LOOK2.jpg"
-                    />
-                </div>
-                <div class="md:w-1/2 p-8">
-                    <h1 class="text-5xl font-bold mb-4">OMO !</h1>
-                    <p class="text-lg mb-6">Buat Akun</p>
+    <body class="bg-white flex items-center justify-center min-h-screen">
+        <div class="flex flex-col lg:flex-row w-full h-auto lg:h-full">
+            <div class="hidden lg:block lg:w-1/2 h-full">
+                <img
+                    class="w-full h-full object-cover"
+                    src="C:\Kelompok1\OMO\public\image\LOOK1.jpg"
+                />
+            </div>
+
+            <div class="w-full lg:w-1/2 p-8 flex items-center justify-center">
+                <div class="w-full max-w-md">
+                    <h1
+                        class="text-4xl font-bold mb-4 text-center lg:text-left"
+                    >
+                        OMO !
+                    </h1>
+                    <h2 class="text-xl mb-6 text-center lg:text-left">
+                        Buat Akun
+                    </h2>
                     <form>
-                        <div class="grid grid-cols-1 gap-4 mb-4">
+                        <div class="mb-4">
                             <input
-                                class="border border-gray-300 rounded-md p-2 w-full"
-                                placeholder="Nama"
                                 type="text"
+                                placeholder="Nama"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
                             />
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                        <div class="mb-4">
                             <input
-                                class="border border-gray-300 rounded-md p-2 w-full"
-                                placeholder="Email"
                                 type="email"
-                            />
-                            <input
-                                class="border border-gray-300 rounded-md p-2 w-full"
-                                placeholder="Nomor Telepon"
-                                type="tel"
+                                placeholder="Email"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
                             />
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                        <div class="mb-4 relative">
                             <input
-                                class="border border-gray-300 rounded-md p-2 w-full"
+                                id="password"
+                                type="password"
                                 placeholder="Password"
-                                type="password"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
                             />
-                            <input
-                                class="border border-gray-300 rounded-md p-2 w-full"
-                                placeholder="Confirm Password"
-                                type="password"
-                            />
+                            <i
+                                id="togglePassword"
+                                class="fas fa-eye absolute right-4 top-2.5 text-gray-500 cursor-pointer"
+                            ></i>
                         </div>
-                        <button
-                            class="w-full py-2 px-4 bg-black text-white rounded-md shadow-md hover:bg-gray-800"
-                            type="submit"
-                        >
-                            Buat Akun
-                        </button>
+
+                        <div class="mb-4 relative">
+                            <input
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="Confirm Password"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
+                            />
+                            <i
+                                id="toggleConfirmPassword"
+                                class="fas fa-eye absolute right-4 top-2.5 text-gray-500 cursor-pointer"
+                            ></i>
+                        </div>
+
+                        <div class="mb-6">
+                            <button
+                                type="submit"
+                                class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                            >
+                                Buat Akun
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p>
+                                Sudah punya akun?
+                                <a href="#" class="text-blue-500 underline"
+                                    >Masuk</a
+                                >
+                            </p>
+                        </div>
                     </form>
-                    <p class="mt-4 text-center text-gray-600">
-                        Sudah punya akun?
-                        <a class="text-blue-500" href="#"> Masuk </a>
-                    </p>
-                    <p class="mt-4 text-right text-gray-600">OMO!</p>
+                    <div class="text-center mt-6">
+                        <p class="mt-8 text-gray-500 text-center">
+                            OhMyOutfit! | Copyright 2024
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            const togglePassword = document.getElementById("togglePassword");
+            const password = document.getElementById("password");
+            const toggleConfirmPassword = document.getElementById(
+                "toggleConfirmPassword"
+            );
+            const confirmPassword = document.getElementById("confirmPassword");
+
+            togglePassword.addEventListener("click", function () {
+                const type =
+                    password.getAttribute("type") === "password"
+                        ? "text"
+                        : "password";
+                password.setAttribute("type", type);
+                this.classList.toggle("fa-eye-slash");
+            });
+
+            toggleConfirmPassword.addEventListener("click", function () {
+                const type =
+                    confirmPassword.getAttribute("type") === "password"
+                        ? "text"
+                        : "password";
+                confirmPassword.setAttribute("type", type);
+                this.classList.toggle("fa-eye-slash");
+            });
+        </script>
     </body>
 </html>
