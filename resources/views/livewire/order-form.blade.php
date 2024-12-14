@@ -1,193 +1,126 @@
 <div>
-    <div class="flex w-[260px] h-[160px] shrink-0 overflow-hidden mx-auto mb-10">
-        <img src="{{ asset($shirt->thumbnail) }}"
-            class="w-full h-full object-contain object-center" alt="thumbnail" />
-    </div>
-    
-    <form wire:submit.prevent="submit" class="flex flex-col gap-5">
-        <div class="flex flex-col rounded-[20px] p-4 mx-4 pb-5 gap-5 bg-white">
-            <div id="info" class="flex items-center justify-between">
-                <div class="flex flex-col">
-                    <h1 id="title" class="font-bold text-[22px] leading-[30px]">
-                        {{$shirt->name}}
-                    </h1>
-                    <p class="font-semibold text-lg leading-[27px]">
-                        Rp {{number_format($shirt->price, 0, ',', '.')}} • {{$orderData['shirt_size']}}
-                    </p>
-                </div>
-                <div class="flex items-center gap-1">
-                    <img src="{{asset('assets/images/icons/Star 1.svg')}}" class="w-[26px] h-[26px]" alt="star" />
-                    <span class="font-semibold text-xl leading-[30px]">4.5</span>
-                </div>
-            </div>
-            
-            <hr class="border-[#EAEAED]">
-            
-            <!-- Customer Information -->
-            <div class="flex flex-col gap-2">
-                <label for="name" class="font-semibold">Complete Name</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/user.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                    <input wire:model="name" type="text" name="name" id="name" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                        placeholder="Type your complete name">
-                </div>
-                @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+  <div class="flex flex-col gap-6 p-6">
+      <!-- Product Image -->
+      <div class="relative h-[200px] rounded-xl overflow-hidden bg-gray-50">
+          <img id="main-thumbnail"
+              src="{{asset('storage/' .$shirt->photos()->latest()->first()->photo)}}"
+              class="w-full h-full object-contain" 
+              alt="{{ $shirt->name }}" />
+      </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="email" class="font-semibold">Email Address</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/sms.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                    <input wire:model="email" type="email" name="email" id="email" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Type your email address">
-                </div>
-                @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+      <!-- Order Form -->
+      <form wire:submit.prevent="submit" class="space-y-6">
+          <!-- Product Info -->
+          <div class="flex items-center justify-between">
+              <div>
+                  <h2 class="text-xl font-bold text-gray-900">{{ $shirt->name }}</h2>
+                  <p class="text-lg font-medium text-gray-700">
+                      Rp {{number_format($shirt->price, 0, ',', '.')}} • {{$orderData['shirt_size']}}
+                  </p>
+              </div>
+              <div class="flex items-center gap-1 bg-blue-50 px-3 py-1 rounded-full">
+                  <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                  <span class="font-medium">4.5</span>
+              </div>
+          </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="phone" class="font-semibold">Phone Number</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/phone.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                    <input wire:model="phone" type="tel" name="phone" id="phone" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Type your phone number">
-                </div>
-                @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+          <!-- Name Input -->
+          <div class="space-y-2">
+              <label for="name" class="block font-medium text-gray-700">Nama Lengkap</label>
+              <div class="relative rounded-full border border-gray-300 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                  </div>
+                  <input wire:model="name" type="text" name="name" id="name" 
+                         class="block w-full pl-10 pr-4 py-3 rounded-full border-0 focus:ring-0"
+                         placeholder="Masukkan nama lengkap">
+              </div>
+              @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+          </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="city" class="font-semibold">City</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/city.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                    <input wire:model="city" type="text" name="city" id="city" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Type your city">
-                </div>
-                @error('city') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+          <!-- Email Input -->
+          <div class="space-y-2">
+              <label for="email" class="block font-medium text-gray-700">Email</label>
+              <div class="relative rounded-full border border-gray-300 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                  </div>
+                  <input wire:model="email" type="email" name="email" id="email"
+                         class="block w-full pl-10 pr-4 py-3 rounded-full border-0 focus:ring-0"
+                         placeholder="Masukkan alamat email">
+              </div>
+              @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+          </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="postCode" class="font-semibold">Post Code</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/postcode.svg')}}" class="w-6 h-6 flex shrink-0" alt="icon">
-                    <input wire:model="postCode" type="text" name="postCode" id="postCode" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Type your post code">
-                </div>
-                @error('postCode') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+          <!-- Quantity -->
+          <div class="space-y-2">
+              <label class="block font-medium text-gray-700">Jumlah</label>
+              <div class="flex items-center gap-4">
+                  <button wire:click="decrementQuantity" type="button"
+                          class="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
+                      <span class="text-xl font-bold">-</span>
+                  </button>
+                  <span class="text-xl font-bold">{{ $quantity }}</span>
+                  <input type="number" wire:model.live.debounce.500ms="quantity" class="sr-only" >
+                  <button wire:click="incrementQuantity" type="button"
+                          class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center">
+                      <span class="text-xl font-bold">+</span>
+                  </button>
+              </div>
+          </div>
 
-            <div class="flex flex-col gap-2">
-                <label for="address" class="font-semibold">Complete Address</label>
-                <div class="flex items-start w-full rounded-2xl ring-1 ring-[#090917] px-[14px] gap-[10px] overflow-hidden transition-all duration-300 focus-within:ring-2 focus-within:ring-[#FFC700]">
-                    <img src="{{asset('assets/images/icons/location.svg')}}" class="w-6 h-6 flex shrink-0 mt-3" alt="icon">
-                    <textarea wire:model="address" name="address" id="address" rows="3"
-                              class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                              placeholder="Type your complete address"></textarea>
-                </div>
-                @error('address') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-            </div>
+          <!-- Promo Code -->
+          <div class="space-y-2">
+              <label for="promo" class="block font-medium text-gray-700">Kode Promo</label>
+              <div class="relative rounded-full border border-gray-300 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                      </svg>
+                  </div>
+                  <input wire:model.live.debounce.500ms="promoCode" type="text" name="promo" id="promo"
+                         class="block w-full pl-10 pr-4 py-3 rounded-full border-0 focus:ring-0"
+                         placeholder="Masukkan kode promo">
+              </div>
+              @if (session()->has('message'))
+                  <p class="text-green-600 text-sm font-medium">{{ session('message') }}</p>
+              @endif
+              @if (session()->has('error'))
+                  <p class="text-red-600 text-sm font-medium">{{ session('error') }}</p>
+              @endif
+          </div>
 
-            <hr class="border-[#EAEAED]">
+          <!-- Price Summary -->
+          <div class="space-y-3 pt-4">
+              <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">Subtotal</span>
+                  <span class="font-bold">Rp {{number_format($subTotalAmount, 0, ',', '.')}}</span>
+              </div>
+              <div class="flex justify-between">
+                  <span class="font-medium text-gray-700">Diskon</span>
+                  <span class="font-bold text-red-600">- Rp {{number_format($discount, 0, ',', '.')}}</span>
+              </div>
+          </div>
+      </form>
+  </div>
 
-            <!-- Quantity Section -->
-            <div class="flex flex-col gap-2">
-                <p class="font-semibold">Quantity</p>
-                <div class="relative flex items-center gap-[30px]">
-                    <button wire:click="decrementQuantity" type="button" 
-                            class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#2A2A2A] overflow-hidden">
-                        <span class="font-bold text-xl leading-[30px] text-white">-</span>
-                    </button>
-                    <p id="quantity-display" class="font-bold text-xl leading-[30px]">{{ $quantity }}</p>
-                    <button wire:click="incrementQuantity" type="button" 
-                            class="flex w-full h-[54px] items-center justify-center rounded-full bg-[#C5F277] overflow-hidden">
-                        <span class="font-bold text-xl leading-[30px]">+</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Promo Code Section -->
-            <div class="flex flex-col gap-2">
-                <label for="promo" class="font-semibold">Promo Code</label>
-                <div class="flex items-center w-full rounded-full ring-1 ring-[#090917] px-[14px] gap-[10px]">
-                    <input wire:model.live.debounce.500ms="promoCode" type="text" name="promo" id="promo" 
-                           class="appearance-none outline-none w-full font-semibold placeholder:font-normal placeholder:text-[#878785] py-[14px]" 
-                           placeholder="Input the promo code">
-                </div>
-                @if (session()->has('message'))
-                <span class="font-semibold text-sm leading-[21px] text-[#01A625]">{{ session('message') }}</span>
-            @endif
-            @if (session()->has('error'))
-                <span class="font-semibold text-sm leading-[21px] text-[#FF1943]">{{ session('error') }}</span>
-            @endif
-        </div>
-
-        <hr class="border-[#EAEAED]">
-
-        <!-- Price Summary -->
-        <div class="space-y-3">
-            <div class="flex items-center justify-between">
-                <p class="font-semibold">Sub Total</p>
-                <p id="total-price" class="font-bold">Rp {{number_format($subTotalAmount, 0, ',', '.')}}</p>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <p class="font-semibold">Tax (11%)</p>
-                <p id="tax-amount" class="font-bold">Rp {{number_format($subTotalAmount * 0.11, 0, ',', '.')}}</p>
-            </div>
-
-            <div class="flex items-center justify-between">
-                <p class="font-semibold">Discount</p>
-                <p id="discount" class="font-bold text-[#FF1943]">- Rp {{number_format($discount, 0, ',', '.')}}</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div id="bottom-nav" class="relative flex h-[100px] w-full shrink-0 mt-5">
-        <div class="fixed bottom-5 w-full max-w-[640px] z-30 px-4">
-            <div class="flex items-center justify-between rounded-full bg-[#2A2A2A] p-[10px] pl-6">
-                <div class="flex flex-col gap-[2px]">
-                    <p id="grand-total" class="font-bold text-[20px] leading-[30px] text-white">
-                        Rp {{number_format($grandTotalAmount, 0, ',', '.')}}
-                    </p>
-                    <p class="text-sm leading-[21px] text-[#878785]">Grand total</p>
-                </div>
-                <button type="submit" 
-                        class="rounded-full p-[12px_20px] bg-[#C5F277] font-bold hover:bg-[#b3e065] transition-colors">
-                    Continue to Payment
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Loading State Overlay -->
-    <div wire:loading class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-white p-4 rounded-lg shadow-lg flex items-center">
-            <svg class="animate-spin h-5 w-5 mr-3 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>Processing...</span>
-        </div>
-    </div>
-</form>
-
-<!-- Flash Messages -->
-<div x-data="{ show: false, message: '' }" 
-     x-show="show" 
-     x-init="
-        $wire.on('flash-message', (message) => {
-            message = message;
-            show = true;
-            setTimeout(() => show = false, 3000);
-        })
-     "
-     class="fixed top-4 right-4 z-50">
-    <div class="bg-green-500 text-white px-4 py-2 rounded shadow-lg" x-show="show" x-transition>
-        <p x-text="message"></p>
-    </div>
-</div>
+  <!-- Bottom Navigation -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t max-w-[640px] mx-auto">
+      <div class="px-6 py-4 flex items-center justify-between">
+          <div>
+              <p class="text-2xl font-bold">Rp {{number_format($grandTotalAmount, 0, ',', '.')}}</p>
+              <p class="text-sm text-gray-500">Total Pembayaran</p>
+          </div>
+          <button type="submit" form="order-form"
+                  class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full">
+              Lanjutkan
+          </button>
+      </div>
+  </div>
 </div>

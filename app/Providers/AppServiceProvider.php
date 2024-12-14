@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Livewire\Livewire; 
-use App\Livewire\OrderForm; 
+use App\Livewire\OrderForm;
 use App\View\Components\AppLayout;
 use App\Repositories\OrderRepository;
 use App\Repositories\ShirtRepository;

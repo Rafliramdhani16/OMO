@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    @vite(['resources/css/app.css','resources/js/app.js', 'resources/js/booking.js'])
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         [x-cloak] { display: none !important; }
         body {
@@ -200,6 +200,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-     @stack('scripts')
+    @stack('scripts')
 </body>
 </html>
