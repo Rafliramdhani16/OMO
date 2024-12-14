@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sizeRadios = document.querySelectorAll('input[name="shirt_size"]');
     const sizeIdInput = document.getElementById("size_id");
 
+    // Handle size selection
     sizeRadios.forEach((radio) => {
         radio.addEventListener("change", function () {
             const selectedSizeId = this.getAttribute("data-size-id");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         orderForm.addEventListener("submit", function (e) {
             e.preventDefault();
 
+            // Validate size selection
             const selectedSize = document.querySelector(
                 'input[name="shirt_size"]:checked'
             );
@@ -22,8 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            // Set the size_id before submission
             sizeIdInput.value = selectedSize.getAttribute("data-size-id");
 
+            // Submit the form
             this.submit();
         });
     }

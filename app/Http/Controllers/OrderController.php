@@ -8,31 +8,31 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\StorePaymentRequest;
 use App\Models\ProductTransaction;
 use App\Models\Shirt;
+use App\Models\ShirtSize;
 use App\Services\OrderService;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    //
-
     protected $orderService;
+
     public function __construct(OrderService $orderService)
     {
         $this->orderService = $orderService;
     }
+
     public function saveOrder(StoreOrderRequest $request, Shirt $shirt)
     {
-        //proses penyimpanan ke session
         $validated = $request->validated();
-
+        
         $validated['shirt_id'] = $shirt->id;
+        $validated['shirt_size'] = ShirtSize::findOrFail($validated['size_id'])->size;
 
         $this->orderService->beginOrder($validated);
 
         return redirect()->route('front.booking', $shirt->slug);
     }
-
     public function booking()
     {
         $data = $this->orderService->getOrderDetails();

@@ -6,14 +6,13 @@
     <div class="max-w-7xl mx-auto px-4 py-16">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div>
-            
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
                     Temukan Gayamu dengan Koleksi Terbaru Kami
                 </h1>
                 <p class="text-lg text-gray-600 mb-8">Jelajahi pilihan pakaian premium kami yang dirancang untuk gaya unik Anda.</p>
             </div>
             <div class="hidden md:block relative">
-                <img src="{{ asset('image/hero.jpg') }}" alt="Hero Image" class="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                <img src="{{ asset('/image/hero.jpg') }}" alt="Hero Image" class="w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
                 <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-500/10 to-transparent"></div>
             </div>
         </div>
@@ -24,7 +23,6 @@
 <section id="category" class="max-w-7xl mx-auto px-4 mt-20">
     <div class="flex items-end justify-between mb-8">
         <div>
-            
             <h2 class="text-3xl font-bold text-gray-900">Kategori Unggulan</h2>
             <p class="text-gray-600 mt-2">Telusuri kategori populer kami</p>
         </div>
@@ -43,7 +41,7 @@
         <a href="{{ route('front.category', $itemCategory->slug) }}" class="group">
             <div class="bg-blue-50 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                 <div class="aspect-[3/4] overflow-hidden relative">
-                    <img src="{{ asset($itemCategory->icon) }}" 
+                    <img src="{{ asset('storage/' . $itemCategory->icon) }}" 
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                          alt="{{ $itemCategory->name }}">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -85,12 +83,12 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         @forelse ($popularShirt as $itemPopularShirt)
         <a href="{{ route('front.details', $itemPopularShirt->slug) }}" class="group">
             <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                 <div class="aspect-square overflow-hidden relative">
-                    <img src="{{ asset($itemPopularShirt->thumbnail) }}" 
+                    <img src="{{ asset('storage/' . $itemPopularShirt->thumbnail) }}" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                          alt="{{ $itemPopularShirt->name }}">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -132,7 +130,6 @@
 <section id="fresh" class="max-w-7xl mx-auto px-4 mt-16 mb-16">
     <div class="flex items-end justify-between mb-6">
         <div>
-        
             <h2 class="text-2xl font-bold text-gray-900">Produk Terbaru</h2>
             <p class="text-sm text-gray-600 mt-1">Langsung dari para desainer kami</p>
         </div>
@@ -152,10 +149,9 @@
             <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex h-40">
                 <div class="w-40 flex-shrink-0">
                     <div class="aspect-square relative">
-                        <img src="{{ asset($itemNewShirt->thumbnail) }}" 
+                        <img src="{{ asset('storage/' . $itemNewShirt->thumbnail) }}" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                              alt="{{ $itemNewShirt->name }}">
-
                     </div>
                 </div>
                 <div class="flex-1 p-4 flex flex-col relative">
@@ -188,7 +184,7 @@
             <div class="bg-gray-50 rounded-xl p-6 text-center">
                 <div class="max-w-md mx-auto">
                     <svg class="w-12 h-12 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                     </svg>
                     <h3 class="text-base font-medium text-gray-900 mb-2">Belum Ada Produk Baru</h3>
                     <p class="text-sm text-gray-500">Nantikan koleksi terbaru kami yang akan datang segera.</p>
