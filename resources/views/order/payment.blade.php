@@ -169,7 +169,31 @@
             </div>
         </form>
 
-        <script src="{{ asset('js/accordion.js') }}"></script>
-        <script src="{{ asset('js/payment.js') }}"></script>
+        <script>// accordion's open and close feature handled by tailwind
+            // this script only for height animation
+            document.addEventListener("DOMContentLoaded", function() {
+                const accordions = document.querySelectorAll('.accordion');
+                
+                accordions.forEach(accordion => {
+                    const height = accordion.scrollHeight; 
+                    accordion.style.height = `${height}px`; 
+                });
+            });</script>
+        <script>const fileInput = document.getElementById("Proof");
+            const fileBtn = document.getElementById("Upload-btn");
+            
+            fileInput.addEventListener("change", function () {
+                const file = this.files[0];
+            
+                if(file){
+                    fileBtn.innerText = file.name;
+                    fileBtn.classList.add("font-semibold");
+                    fileBtn.classList.remove("text-[#878785]");
+                }else{
+                    fileBtn.innerText = "Add an attachment";
+                    fileBtn.classList.remove("font-semibold");
+                    fileBtn.classList.add("text-[#878785]");
+                }
+            });</script>
     </body>
 </html>
