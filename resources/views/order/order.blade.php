@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="pt-20 pb-16">
+<div class="pt-5 pb-16">
     <!-- Breadcrumb -->
     <div class="max-w-7xl mx-auto px-4 mt-4">
         <nav class="flex items-center gap-2 text-sm text-gray-500">
