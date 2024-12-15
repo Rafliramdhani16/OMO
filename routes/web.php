@@ -1,8 +1,35 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Route;
+
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/login?', [AuthController::class, 'showLogin'])->name('login');
+    Route::name('auth.')->group(function () {
+        Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/forget', [AuthController::class, 'forgetPassword'])->name('forget');
+        Route::post('/reset', [AuthController::class, 'resetPassword'])->name('reset');
+    });
+    Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
+    Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
+});
+Route::middleware('auth')->group(function () {
+
+    Route::name('auth.')->group(function () {
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
+        Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
+    });
+});
+
+
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 

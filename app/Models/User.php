@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -44,5 +45,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // ubah image jadi link
+    public function getImageAttribute($value)
+    {
+        // cek kalo diawali dari link tinggal return aja
+        if (strpos($value, 'http') === 0) {
+            return $value;
+        }
+        return asset('storage/' . $value);
     }
 }
