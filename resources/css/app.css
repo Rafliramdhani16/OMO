@@ -1,3 +1,150 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        /* Colors */
+        --color-primary: 59 130 246; /* blue-500 */
+        --color-primary-dark: 37 99 235; /* blue-600 */
+        --color-secondary: 99 102 241; /* indigo-500 */
+    }
+
+    body {
+        @apply font-sans text-gray-900 bg-gray-50;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-sans font-bold;
+    }
+}
+
+@layer components {
+    /* Card Components */
+    .card-base {
+        @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300;
+    }
+
+    .card-hover {
+        @apply hover:scale-105 transition-transform duration-500;
+    }
+
+    /* Button Components */
+    .btn-base {
+        @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-medium transition-all duration-300;
+    }
+
+    .btn-primary {
+        @apply btn-base bg-blue-600 text-white hover:bg-blue-700;
+    }
+
+    .btn-secondary {
+        @apply btn-base bg-gray-100 text-gray-700 hover:bg-gray-200;
+    }
+
+    /* Badge Components */
+    .badge-base {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    }
+
+    .badge-primary {
+        @apply badge-base bg-blue-50 text-blue-600;
+    }
+
+    .badge-secondary {
+        @apply badge-base bg-gray-100 text-gray-700;
+    }
+
+    /* Section Components */
+    .section-container {
+        @apply max-w-7xl mx-auto px-4;
+    }
+
+    .section-header {
+        @apply flex items-end justify-between mb-8;
+    }
+
+    .section-title {
+        @apply text-2xl md:text-3xl font-bold text-gray-900;
+    }
+
+    .section-subtitle {
+        @apply text-gray-600 mt-2;
+    }
+
+    /* Link Components */
+    .link-primary {
+        @apply group inline-flex items-center text-sm text-blue-600 hover:text-blue-700 font-medium;
+    }
+
+    .link-hover {
+        @apply border-b border-transparent hover:border-current transition-colors duration-200;
+    }
+
+    /* Product Card */
+    .product-card {
+        @apply card-base overflow-hidden;
+    }
+
+    .product-image {
+        @apply aspect-square relative overflow-hidden;
+    }
+
+    .product-image img {
+        @apply w-full h-full object-cover transition-transform duration-500 group-hover:scale-105;
+    }
+
+    .product-overlay {
+        @apply absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+    }
+
+    .product-content {
+        @apply p-4;
+    }
+
+    .product-title {
+        @apply font-medium text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors;
+    }
+
+    .product-price {
+        @apply text-slate-700 font-semibold;
+    }
+
+    /* Rating Components */
+    .rating-container {
+        @apply flex items-center;
+    }
+
+    .rating-star {
+        @apply w-4 h-4 text-yellow-400;
+    }
+
+    /* Image Components */
+    .img-aspect-square {
+        @apply aspect-square w-full h-full object-cover;
+    }
+
+    .img-hover {
+        @apply transition-transform duration-500 hover:scale-105;
+    }
+
+    /* Grid Layouts */
+    .grid-products {
+        @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4;
+    }
+
+    .grid-categories {
+        @apply grid grid-cols-2 lg:grid-cols-4 gap-8;
+    }
+}
+
+@layer utilities {
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
+    }
+}

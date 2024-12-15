@@ -70,7 +70,7 @@ class OrderController extends Controller
         return redirect()->route('front.index')->withErrors(['error' => 'Payment failed. Please try again']);
     }
 
-    public function orderFinished(ProductTransaction $productTransaction)
+    public function orderFinished(ProductTransaction $productTransaction )
     {
         return view('order.order_finished', compact('productTransaction'));
     }

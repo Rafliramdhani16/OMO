@@ -15,7 +15,8 @@ use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\ShirtRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\PromoCodeRepositoryInterface;
-
+use App\View\Components\Footer;
+use App\View\Components\Navbar;
 
 class AppServiceProvider extends ServiceProvider
 {
