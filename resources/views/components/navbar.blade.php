@@ -5,6 +5,7 @@
     userMenuOpen: false,
     scrolled: false,
     searchQuery: '',
+    showLogoutConfirm: false,
     
     toggleSearch() {
         this.searchOpen = !this.searchOpen;
@@ -17,12 +18,12 @@
     
     handleSearch() {
         if (this.searchQuery.length > 0) {
-            // Implement search logic here
             console.log('Searching for:', this.searchQuery);
         }
     }
 }" @scroll.window="scrolled = window.pageYOffset > 20">
 
+    <!-- Main Navigation Bar -->
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         :class="{ 'bg-white/90 shadow-sm backdrop-blur-lg': scrolled || mobileMenuOpen, 'bg-transparent': !scrolled && !mobileMenuOpen }">
         <div class="max-w-7xl mx-auto">
@@ -160,20 +161,20 @@
 
                                 <div class="h-px bg-gray-100 my-2"></div>
 
-                                <!-- Logout -->
-                                <a href="{{ route('auth.logout') }}" 
-                                    class="flex items-center gap-3 p-2.5 rounded-xl text-gray-700 hover:bg-red-50 transition-all duration-300 group">
+                                <!-- Logout Button -->
+                                <button @click="showLogoutConfirm = true; open = false" 
+                                    class="w-full flex items-center gap-3 p-2.5 rounded-xl text-gray-700 hover:bg-red-50 transition-all duration-300 group">
                                     <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-lg bg-red-50 text-red-600 group-hover:bg-red-100 transition-colors duration-300">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                         </svg>
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 text-left">
                                         <p class="text-sm font-medium group-hover:text-red-600 transition-colors duration-300">Keluar</p>
                                         <p class="text-xs text-gray-500">Akhiri sesi anda</p>
                                     </div>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -218,7 +219,7 @@
                         class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl transition-all duration-300 {{ request()->routeIs('front.category') ? 'text-blue-600 bg-blue-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                         </svg>
                         <span>Kategori</span>
                     </a>
@@ -285,8 +286,61 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
 
+    <!-- Logout Confirmation Modal -->
+    <div x-show="showLogoutConfirm" 
+        x-cloak
+        class="fixed inset-0 z-[60] overflow-y-auto"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm"></div>
 
+        <!-- Dialog -->
+        <div class="relative min-h-screen flex items-center justify-center p-4">
+            <div class="relative bg-white w-full max-w-md rounded-2xl shadow-xl p-6 text-center"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                @click.away="showLogoutConfirm = false">
+                
+                <!-- Logout Icon -->
+                <div class="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600 mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                </div>
+
+                <!-- Content -->
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    Konfirmasi Keluar
+                </h3>
+                <p class="text-sm text-gray-500 mb-6">
+                    Apakah Anda yakin ingin keluar dari akun ini?
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex gap-3">
+                    <button @click="showLogoutConfirm = false"
+                        class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all duration-300">
+                        Batal
+                    </button>
+                    <a href="{{ route('auth.logout') }}"
+                        class="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700 transition-all duration-300 hover:shadow-lg hover:shadow-red-200">
+                        Ya, Keluar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
