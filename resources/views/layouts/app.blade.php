@@ -43,7 +43,7 @@
             @apply w-full;
         }
 
-        /* Enhanced Dropdown Animations */
+        
         .dropdown-enter {
             @apply transition-all duration-500 ease-in-out;
             animation: dropdownEnter 0.5s ease-in-out forwards;
@@ -79,7 +79,7 @@
             }
         }
 
-        /* Menu Item Animation */
+        
         .menu-item {
             @apply relative flex items-center gap-3 px-4 py-3 text-sm transition-all duration-300;
         }
@@ -101,7 +101,7 @@
             @apply transform scale-110;
         }
 
-        /* Enhanced Page Load Animation */
+        
         .fade-in {
             animation: fadeIn 0.8s ease-in-out;
         }
@@ -117,7 +117,7 @@
             }
         }
 
-        /* Enhanced Search Animation */
+        
         .search-overlay {
             @apply transition-all duration-500 ease-in-out;
         }
@@ -147,7 +147,7 @@
         @include('components.navbar')
 
 
-    <!-- Main Content -->
+    
     <main class="flex-grow mt-20">
         @yield('content')
     </main>
@@ -157,11 +157,11 @@
     @stack('scripts')
 
     <script>
-        // Initialize page load animation
+        
         document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('fade-in');
             
-            // Add active class to search overlay when opened
+            
             const searchOverlay = document.querySelector('.search-overlay');
             if (searchOverlay) {
                 setTimeout(() => {
@@ -170,7 +170,7 @@
             }
         });
 
-        // Enhanced scroll behavior
+        
         window.addEventListener('scroll', function() {
             const nav = document.querySelector('nav');
             if (window.scrollY > 20) {

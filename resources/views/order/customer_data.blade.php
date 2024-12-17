@@ -3,7 +3,6 @@
 @section('content')
 <div class=" bg-gradient-to-br from-gray-50 to-blue-50/30">
     <div class="max-w-7xl mx-auto px-4 py-8 ">
-        <!-- Page Header -->
         <div class="flex items-center justify-between mb-8">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Detail Pengiriman</h1>
@@ -13,7 +12,6 @@
 
         <!-- Main Content -->
         <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Left Column - Form -->
             <div class="lg:col-span-2 space-y-6">
                 <form action="{{ route('front.save_customer_data') }}" method="POST" id="shipping-form">
                     @csrf
@@ -23,8 +21,8 @@
                         <div class="flex gap-6">
                             <div class="w-24 h-24 bg-slate-100 rounded-xl overflow-hidden flex-shrink-0">
                                 <img src="{{Storage::url($shirt->photos()->latest()->first()->photo)}}"
-                                     class="w-full h-full object-cover hover:scale-110 transition-all duration-500"
-                                     alt="{{ $shirt->name }}">
+                                    class="w-full h-full object-cover hover:scale-110 transition-all duration-500"
+                                    alt="{{ $shirt->name }}">
                             </div>
                             <div class="flex-1">
                                 <h2 class="text-lg font-bold text-slate-900 mb-1">{{ $shirt->name }}</h2>

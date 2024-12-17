@@ -6,18 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
-
 use Illuminate\Auth\Events\PasswordReset;
-
 use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     public function showLogin()
     {
-
         return view('auth.login');
     }
 
@@ -26,13 +22,23 @@ class AuthController extends Controller
         $validatedData = $request->validate([
             'email' => 'required|string|email:rfc,dns',
             'password' => 'required',
+        ], [
+            'email.required' => 'Email wajib diisi!',
+            'email.email' => 'Format email tidak valid!',
+            'password.required' => 'Password wajib diisi!'
         ]);
 
-        if (Auth::attempt($validatedData)) {
+        if (Auth::attempt($validatedData, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            
+            $user = Auth::user();
+            return redirect()->intended('/')
+                ->with('success', "Selamat datang kembali, {$user->name}! 👋");
         }
-        return back()->with('error', 'Email atau password salah');
+
+        return back()
+            ->withInput($request->only('email'))
+            ->with('error', 'Email atau password yang Anda masukkan salah. Silakan coba lagi! 🔒');
     }
 
     public function showRegister()
@@ -47,26 +53,39 @@ class AuthController extends Controller
             'email' => 'required|string|email:rfc,dns|max:255|unique:users',
             'password' => 'required|string|min:8',
             'password2' => 'required|string|min:8|same:password',
+        ], [
+            'name.required' => 'Nama wajib diisi!',
+            'name.max' => 'Nama terlalu panjang!',
+            'email.required' => 'Email wajib diisi!',
+            'email.email' => 'Format email tidak valid!',
+            'email.unique' => 'Email sudah terdaftar!',
+            'password.required' => 'Password wajib diisi!',
+            'password.min' => 'Password minimal 8 karakter!',
+            'password2.same' => 'Konfirmasi password tidak cocok!'
         ]);
 
-        $validatedData['image'] = 'https://ui-avatars.com/api/?name=' . $validatedData['name'] . '&background=random';
-
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData['image'] = 'https://ui-avatars.com/api/?name=' . urlencode($validatedData['name']) . '&background=random&color=ffffff';
 
         User::create($validatedData);
 
-        return redirect()->route('auth.login')->with('success', 'Pendaftaran berhasil, silahkan login');
+        return redirect()
+            ->route('auth.login')
+            ->with('success', 'Selamat! Akun Anda berhasil dibuat. Silakan login untuk melanjutkan. 🎉');
     }
 
     public function logout(Request $request)
     {
+        $name = Auth::user()->name;
+        
         Auth::logout();
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.login')->with('success', 'Anda sudah logout');
+        return redirect()
+            ->route('front.index')
+            ->with('success', "Sampai jumpa kembali, {$name}! 👋");
     }
-
 
     public function showForgetPassword()
     {
@@ -75,68 +94,68 @@ class AuthController extends Controller
 
     public function forgetPassword(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'email' => 'required|string|email:rfc,dns'
+        ], [
+            'email.required' => 'Email wajib diisi!',
+            'email.email' => 'Format email tidak valid!'
         ]);
 
-        $user = User::where('email', $validatedData['email'])->first();
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
 
-        if ($user) {
-            $status = Password::sendResetLink([
-                'email' => $validatedData['email']
-            ]);
-
-            // Cek status pengiriman
-            if ($status === Password::RESET_LINK_SENT) {
-                return redirect()->to('/forget')->with('success', 'Link reset password telah dikirim ke email Anda.');
-            } else {
-                return redirect()->to('/forget')->with('error', 'Terjadi kesalahan saat mengirim link reset password.');
-            }
+        if ($status === Password::RESET_LINK_SENT) {
+            return back()->with('success', 'Link reset password telah dikirim ke email Anda. Silakan cek inbox atau folder spam Anda. 📧');
         }
 
-        return redirect()->to('/forget')->with('error', 'Email tidak ditemukan.');
+        return back()
+            ->withInput($request->only('email'))
+            ->with('error', 'Maaf, kami tidak dapat menemukan akun dengan email tersebut. 😢');
     }
 
     public function showResetPassword(Request $request)
     {
-
-        $data = [
-            'token' => $request->query('token'),
-            'email' => $request->query('email'),
-        ];
-        return view('auth.ubahpassword', $data);
+        return view('auth.ubahpassword', [
+            'token' => $request->token,
+            'email' => $request->email
+        ]);
     }
 
     public function resetPassword(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'password2' => 'required|min:8|same:password',
+            'password_confirmation' => 'required|min:8|same:password'
+        ], [
+            'password.min' => 'Password minimal 8 karakter!',
+            'password_confirmation.same' => 'Konfirmasi password tidak cocok!'
         ]);
 
         $status = Password::reset(
-            $request->only('email', 'password', 'password2', 'token'),
+            $request->only('email', 'password', 'password_confirmation', 'token'),
             function (User $user, string $password) {
                 $user->forceFill([
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
 
                 $user->save();
-
                 event(new PasswordReset($user));
             }
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        ? redirect()->route('auth.login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function showEditProfile()
     {
-        return view('auth.editprofile');
+        return view('auth.editprofile', [
+            'user' => Auth::user()
+        ]);
     }
 
     public function editProfile(Request $request)
