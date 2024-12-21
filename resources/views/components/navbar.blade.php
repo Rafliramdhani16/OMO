@@ -30,7 +30,9 @@
             <div class="flex items-center justify-between px-4 h-20">
                 <!-- Logo -->
                 <a href="{{ route('front.index') }}" class="group flex items-center space-x-2">
-                    <img src="{{ asset('image/LOGOOMO.png') }}" alt="" class="w-15 h-10">
+                    <span class="font-bold text-3xl text-gray-900 transform transition-transform group-hover:scale-105">
+                        O M O !
+                    </span>
                 </a>
 
                 <!-- Desktop Navigation -->

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\SocialiteController;
+
 
 Route::middleware('guest')->group(function () {
 
@@ -16,6 +16,8 @@ Route::middleware('guest')->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/forget', [AuthController::class, 'forgetPassword'])->name('forget');
         Route::post('/reset', [AuthController::class, 'resetPassword'])->name('reset');
+        Route::get('/diakun', [AuthController::class, 'redirectDiAkun'])->name('diakun');
+        Route::get('/diakun/callback/{token}', [AuthController::class, 'callbackDiakun']);
     });
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
@@ -48,7 +50,3 @@ Route::get('/order/payment', [OrderController::class, 'payment'])->name('front.p
 Route::post('/order/payment/confirm', [OrderController::class, 'paymentConfirm'])->name('front.payment_confirm');
 
 Route::get('/order/finished/{productTransaction:id}', [OrderController::class, 'orderFinished'])->name('front.order_finished');
-
-Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
-
-Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);

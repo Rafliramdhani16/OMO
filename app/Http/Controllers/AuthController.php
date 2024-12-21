@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
+use Exception;
+use Illuminate\Auth\Events\PasswordReset;
 
 class AuthController extends Controller
 {
@@ -30,7 +32,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($validatedData, $request->remember)) {
             $request->session()->regenerate();
-            
+
             $user = Auth::user();
             return redirect()->intended('/')
                 ->with('success', "Selamat datang kembali, {$user->name}! 👋");
@@ -77,7 +79,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $name = Auth::user()->name;
-        
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -147,8 +149,8 @@ class AuthController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-        ? redirect()->route('auth.login')->with('status', __($status))
-        : back()->withErrors(['email' => [__($status)]]);
+            ? redirect()->route('auth.login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function showEditProfile()
@@ -178,5 +180,58 @@ class AuthController extends Controller
 
         User::where('id', Auth::user()->id)->update($validatedData);
         return redirect()->route('auth.profile')->with('success', 'Profile berhasil diubah');
+    }
+
+
+    public function redirectDiAkun()
+    {
+        return redirect()->to("https://sso.bhadrikais.my.id/signin/" . env('TOKEN_DIAKUN'));
+    }
+
+
+    public function callbackDiakun(string $token = null, Request $request)
+    {
+        if ($token !== null) {
+            try {
+                $client = new Client();
+                $api = $client->request('POST', 'https://sso.bhadrikais.my.id/otentikasi/login/' . env('TOKEN_DIAKUN'), [
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Authorization' => 'Bearer ' . $token,
+                    ]
+                ]);
+                $json = json_decode($api->getBody(), true);
+                return $this->loggingIn('diakun', $json);
+            } catch (Exception $e) {
+                return back()->with('error', "Something wrong!");
+            }
+        }
+        return redirect('/login');
+    }
+
+    public function loggingIn(string $app, $data)
+    {
+        if ($data && $app) {
+            if (strtolower($app) == 'diakun') {
+                $data = [
+                    'name' => $data['data']['fullname'],
+                    'image' => $data['data']['image'],
+                    'email' => $data['data']['email'],
+                    'password' => Hash::make('password' . $data['data']['email'] . $data['data']['uuid'] . time()),
+                ];
+            }
+
+
+            $user = User::firstOrCreate([
+                'email' => $data['email'],
+            ], $data);
+
+            Auth::login($user);
+            $user = Auth::user();
+            return redirect()->intended('/')
+                ->with('success', "Selamat datang kembali, {$user->name}! 👋");
+        }
+
+        return back()->with('error', "Something wrong!");
     }
 }
