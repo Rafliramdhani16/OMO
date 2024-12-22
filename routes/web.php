@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
         Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
+        
     });
 });
 
