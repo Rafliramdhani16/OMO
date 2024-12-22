@@ -38,11 +38,11 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('front.index') }}"
-                        class="nav-link text-sm font-medium {{ request()->routeIs('front.index') ? 'text-blue-600 after:w-full' : '' }}">
+                        class="nav-link text-md font-medium {{ request()->routeIs('front.index') ? 'text-blue-600 after:w-full' : '' }}">
                         Beranda
                     </a>
                     <a href="#"
-                        class="nav-link text-sm font-medium {{ request()->routeIs('front.category') ? 'text-blue-600 after:w-full' : '' }}">
+                        class="nav-link text-md font-medium {{ request()->routeIs('front.category') ? 'text-blue-600 after:w-full' : '' }}">
                         Kategori
                     </a>
                     <a href="#"
