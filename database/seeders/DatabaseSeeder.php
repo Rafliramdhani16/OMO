@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             $iconPath = $category['icon'];
             $extension = pathinfo($iconPath, PATHINFO_EXTENSION);
             $filename = 'seeder-assets/kategori/' . Str::slug($category['name']) . '.' . $extension;
-            
+
             // Copy file to storage
             if (file_exists($iconPath)) {
                 Storage::disk('public')->putFileAs(
@@ -47,10 +47,10 @@ class DatabaseSeeder extends Seeder
                     $iconPath,
                     basename($filename)
                 );
-                
+
                 $category['icon'] = $filename;
             }
-            
+
             Category::create($category);
         }
 
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             $logoPath = $brand['logo'];
             $extension = pathinfo($logoPath, PATHINFO_EXTENSION);
             $filename = 'seeder-assets/brand/' . Str::slug($brand['name']) . '.' . $extension;
-            
+
             // Copy file to storage
             if (file_exists($logoPath)) {
                 Storage::disk('public')->putFileAs(
@@ -85,10 +85,10 @@ class DatabaseSeeder extends Seeder
                     $logoPath,
                     basename($filename)
                 );
-                
+
                 $brand['logo'] = $filename;
             }
-            
+
             Brand::create($brand);
         }
 
@@ -113,17 +113,111 @@ class DatabaseSeeder extends Seeder
 
         $shirts = [
             [
-                'name' => 'Kaos Basic',
+                'name' => 'Kaos Adidas',
                 'thumbnail' => database_path('seeders/seeder-assets/baju/baju1.jpg'),
+                'about' => 'Kaos premium dengan bahan pilihan',
+                'price' => 175000,
+                'stock' => 80,
+                'is_popular' => true,
+                'category_id' => 1,
+                'brand_id' => 1,
+                'photos' => [
+                    database_path('seeders/seeder-assets/baju/baju1.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju6.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju7.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos HnM',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju10.jpg'),
+                'about' => 'Kaos premium dengan bahan pilihan',
+                'price' => 175000,
+                'stock' => 80,
+                'is_popular' => true,
+                'category_id' => 1,
+                'brand_id' => 2,
+                'photos' => [
+                    database_path('seeders/seeder-assets/baju/baju8.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju9.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju10.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos Uniqlo',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju3.jpg'),
                 'about' => 'Kaos katun berkualitas untuk pakaian sehari-hari',
                 'price' => 150000,
                 'stock' => 100,
                 'is_popular' => false,
                 'category_id' => 1,
-                'brand_id' => 2,
+                'brand_id' => 3,
+                'photos' => [
+                    database_path('seeders/seeder-assets/baju/baju3.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju4.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju5.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos Zara',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju11.jpg'),
+                'about' => 'Kaos premium dengan bahan pilihan',
+                'price' => 275000,
+                'stock' => 80,
+                'is_popular' => true,
+                'category_id' => 1,
+                'brand_id' => 4,
+                'photos' => [
+                    database_path('seeders/seeder-assets/baju/baju11.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju12.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju13.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos Clasic',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju7.jpg'),
+                'about' => 'Kaos premium dengan bahan pilihan',
+                'price' => 175000,
+                'stock' => 80,
+                'is_popular' => true,
+                'category_id' => 1,
+                'brand_id' => 1,
                 'photos' => [
                     database_path('seeders/seeder-assets/baju/baju1.jpg'),
-                    database_path('seeders/seeder-assets/baju/baju2.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju6.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju7.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos Retro',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju8.jpg'),
+                'about' => 'Kaos premium dengan bahan pilihan',
+                'price' => 175000,
+                'stock' => 80,
+                'is_popular' => true,
+                'category_id' => 1,
+                'brand_id' => 2,
+                'photos' => [
+                    database_path('seeders/seeder-assets/baju/baju8.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju9.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju10.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Kaos Casual',
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju9.jpg'),
+                'about' => 'Kaos katun berkualitas untuk pakaian sehari-hari',
+                'price' => 150000,
+                'stock' => 100,
+                'is_popular' => false,
+                'category_id' => 1,
+                'brand_id' => 3,
+                'photos' => [
                     database_path('seeders/seeder-assets/baju/baju3.jpg'),
                     database_path('seeders/seeder-assets/baju/baju4.jpg'),
                     database_path('seeders/seeder-assets/baju/baju5.jpg')
@@ -132,61 +226,174 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Kaos Premium',
-                'thumbnail' => database_path('seeders/seeder-assets/baju/baju1.jpg'),
+                'thumbnail' => database_path('seeders/seeder-assets/baju/baju10.jpg'),
                 'about' => 'Kaos premium dengan bahan pilihan',
-                'price' => 175000,
+                'price' => 275000,
                 'stock' => 80,
                 'is_popular' => true,
                 'category_id' => 1,
-                'brand_id' => 3,
+                'brand_id' => 4,
                 'photos' => [
-                    database_path('seeders/seeder-assets/baju/baju1.jpg'),
-                    database_path('seeders/seeder-assets/baju/baju1.jpg')
+                    database_path('seeders/seeder-assets/baju/baju11.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju12.jpg'),
+                    database_path('seeders/seeder-assets/baju/baju13.jpg')
                 ],
                 'sizes' => ['S', 'M', 'L', 'XL']
             ],
             [
-                'name' => 'Hoodie Klasik',
+                'name' => 'Hoodie Adidas',
                 'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie1.jpg'),
-                'about' => 'Hoodie klasik dengan desain timeless',
+                'about' => 'Hoodie adidas dengan desain timeless',
                 'price' => 299000,
                 'stock' => 75,
                 'is_popular' => true,
                 'category_id' => 2,
                 'brand_id' => 1,
                 'photos' => [
-                    database_path('seeders/seeder-assets/hoodie/hoodie1.jpg'),
-                    database_path('seeders/seeder-assets/hoodie/hoodie2.jpg'),
-                    database_path('seeders/seeder-assets/hoodie/hoodie3.jpg')
+                    database_path('seeders/seeder-assets/hoodie/hoodie4.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie5.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie6.jpg')
                 ],
                 'sizes' => ['M', 'L', 'XL', 'XXL']
             ],
             [
-                'name' => 'Hoodie Olahraga',
-                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie1.jpg'),
+                'name' => 'Hoodie HnM',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie3.jpg'),
+                'about' => 'Hoodie nyaman untuk musim dingin',
+                'price' => 225000,
+                'stock' => 60,
+                'is_popular' => false,
+                'category_id' => 2,
+                'brand_id' => 2,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie10.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie11.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie12.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Hoodie Uniqlo',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie2.jpg'),
                 'about' => 'Hoodie nyaman untuk berolahraga',
                 'price' => 325000,
                 'stock' => 60,
                 'is_popular' => false,
                 'category_id' => 2,
-                'brand_id' => 1,
+                'brand_id' => 3,
                 'photos' => [
-                    database_path('seeders/seeder-assets/hoodie/hoodie1.jpg'),
-                    database_path('seeders/seeder-assets/hoodie/hoodie1.jpg')
+                    database_path('seeders/seeder-assets/hoodie/hoodie7.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie8.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie9.jpg')
                 ],
                 'sizes' => ['M', 'L', 'XL']
             ],
             [
-                'name' => 'Jaket Musim Dingin',
-                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket1.jpg'),
+                'name' => 'Hoodie Zara',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie13.jpg'),
+                'about' => 'Hoodie nyaman untuk musim dingin',
+                'price' => 225000,
+                'stock' => 60,
+                'is_popular' => false,
+                'category_id' => 2,
+                'brand_id' => 4,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie13.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie14.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie15.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Hoodie Clasic',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie6.jpg'),
+                'about' => 'Hoodie adidas dengan desain timeless',
+                'price' => 299000,
+                'stock' => 75,
+                'is_popular' => true,
+                'category_id' => 2,
+                'brand_id' => 1,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie4.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie5.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie6.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Hoodie Retro',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie7.jpg'),
+                'about' => 'Hoodie nyaman untuk musim dingin',
+                'price' => 225000,
+                'stock' => 60,
+                'is_popular' => false,
+                'category_id' => 2,
+                'brand_id' => 2,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie10.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie11.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie12.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Hoodie Casual',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie8.jpg'),
+                'about' => 'Hoodie nyaman untuk berolahraga',
+                'price' => 325000,
+                'stock' => 60,
+                'is_popular' => false,
+                'category_id' => 2,
+                'brand_id' => 3,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie7.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie8.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie9.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Hoodie Premium',
+                'thumbnail' => database_path('seeders/seeder-assets/hoodie/hoodie9.jpg'),
+                'about' => 'Hoodie nyaman untuk musim dingin',
+                'price' => 225000,
+                'stock' => 60,
+                'is_popular' => false,
+                'category_id' => 2,
+                'brand_id' => 4,
+                'photos' => [
+                    database_path('seeders/seeder-assets/hoodie/hoodie13.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie14.jpg'),
+                    database_path('seeders/seeder-assets/hoodie/hoodie15.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL']
+            ],
+            [
+                'name' => 'Jaket Adidas',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket6.jpg'),
                 'about' => 'Jaket hangat untuk musim dingin',
-                'price' => 450000,
+                'price' => 650000,
                 'stock' => 50,
                 'is_popular' => false,
                 'category_id' => 3,
-                'brand_id' => 3,
+                'brand_id' => 1,
                 'photos' => [
-                    database_path('seeders/seeder-assets/jaket/jaket1.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket6.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket7.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket8.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket HnM',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket1.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 250000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 2,
+                'photos' => [
                     database_path('seeders/seeder-assets/jaket/jaket2.jpg'),
                     database_path('seeders/seeder-assets/jaket/jaket3.jpg'),
                     database_path('seeders/seeder-assets/jaket/jaket4.jpg'),
@@ -195,19 +402,101 @@ class DatabaseSeeder extends Seeder
                 'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
             ],
             [
-                'name' => 'Jaket Olahraga',
-                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket1.jpg'),
-                'about' => 'Jaket ringan untuk aktivitas olahraga',
-                'price' => 375000,
-                'stock' => 60,
-                'is_popular' => true,
+                'name' => 'Jaket Uniqlo',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket9.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 350000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 3,
+                'photos' => [
+                    database_path('seeders/seeder-assets/jaket/jaket9.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket10.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket11.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket Zara',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket12.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 550000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 4,
+                'photos' => [
+                    database_path('seeders/seeder-assets/jaket/jaket12.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket13.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket14.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket Clasic',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket7.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 650000,
+                'stock' => 50,
+                'is_popular' => false,
                 'category_id' => 3,
                 'brand_id' => 1,
                 'photos' => [
-                    database_path('seeders/seeder-assets/jaket/jaket1.jpg'),
-                    database_path('seeders/seeder-assets/jaket/jaket1.jpg')
+                    database_path('seeders/seeder-assets/jaket/jaket6.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket7.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket8.jpg')
                 ],
-                'sizes' => ['S', 'M', 'L', 'XL']
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket Retro',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket8.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 250000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 2,
+                'photos' => [
+                    database_path('seeders/seeder-assets/jaket/jaket2.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket3.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket4.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket5.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket Casual',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket10.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 350000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 3,
+                'photos' => [
+                    database_path('seeders/seeder-assets/jaket/jaket9.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket10.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket11.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
+            ],
+            [
+                'name' => 'Jaket Premium',
+                'thumbnail' => database_path('seeders/seeder-assets/jaket/jaket13.jpg'),
+                'about' => 'Jaket hangat untuk musim dingin',
+                'price' => 550000,
+                'stock' => 50,
+                'is_popular' => false,
+                'category_id' => 3,
+                'brand_id' => 4,
+                'photos' => [
+                    database_path('seeders/seeder-assets/jaket/jaket12.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket13.jpg'),
+                    database_path('seeders/seeder-assets/jaket/jaket14.jpg')
+                ],
+                'sizes' => ['S', 'M', 'L', 'XL', 'XXL']
             ],
             [
                 'name' => 'Kemeja Formal',
@@ -217,26 +506,37 @@ class DatabaseSeeder extends Seeder
                 'stock' => 60,
                 'is_popular' => true,
                 'category_id' => 4,
-                'brand_id' => 4,
+                'brand_id' => 2,
                 'photos' => [
-                    database_path('seeders/seeder-assets/kemeja/kemeja1.jpg'),
-                    database_path('seeders/seeder-assets/kemeja/kemeja2.jpg'),
                     database_path('seeders/seeder-assets/kemeja/kemeja1.jpg')
                 ],
                 'sizes' => ['M', 'L', 'XL', 'XXL']
             ],
             [
+                'name' => 'Kemeja Main',
+                'thumbnail' => database_path('seeders/seeder-assets/kemeja/kemeja2.jpg'),
+                'about' => 'Kemeja formal untuk kegiatan Outdoor',
+                'price' => 450000,
+                'stock' => 60,
+                'is_popular' => true,
+                'category_id' => 4,
+                'brand_id' => 3,
+                'photos' => [
+                    database_path('seeders/seeder-assets/kemeja/kemeja2.jpg')
+                ],
+                'sizes' => ['M', 'L', 'XL', 'XXL']
+            ],
+            [
                 'name' => 'Kemeja Kasual',
-                'thumbnail' => database_path('seeders/seeder-assets/kemeja/kemeja1.jpg'),
+                'thumbnail' => database_path('seeders/seeder-assets/kemeja/kemeja3.jpg'),
                 'about' => 'Kemeja santai untuk sehari-hari',
                 'price' => 325000,
                 'stock' => 70,
                 'is_popular' => true,
                 'category_id' => 4,
-                'brand_id' => 2,
+                'brand_id' => 4,
                 'photos' => [
-                    database_path('seeders/seeder-assets/kemeja/kemeja3.jpg'),
-                    database_path('seeders/seeder-assets/kemeja/kemeja1.jpg')
+                    database_path('seeders/seeder-assets/kemeja/kemeja3.jpg')
                 ],
                 'sizes' => ['M', 'L', 'XL', 'XXL']
             ]
@@ -245,12 +545,12 @@ class DatabaseSeeder extends Seeder
         foreach ($shirts as $shirtData) {
             $photos = $shirtData['photos'];
             $sizes = $shirtData['sizes'];
-            
+
             // Handle thumbnail upload
             $thumbPath = $shirtData['thumbnail'];
             $extension = pathinfo($thumbPath, PATHINFO_EXTENSION);
             $filename = 'seeder-assets/' . Str::slug($shirtData['name']) . '-thumb.' . $extension;
-            
+
             if (file_exists($thumbPath)) {
                 Storage::disk('public')->putFileAs(
                     dirname($filename),
@@ -259,7 +559,7 @@ class DatabaseSeeder extends Seeder
                 );
                 $shirtData['thumbnail'] = $filename;
             }
-            
+
             unset($shirtData['photos'], $shirtData['sizes']);
             $shirt = Shirt::create($shirtData);
 
@@ -268,13 +568,13 @@ class DatabaseSeeder extends Seeder
                 if (file_exists($photoPath)) {
                     $extension = pathinfo($photoPath, PATHINFO_EXTENSION);
                     $filename = 'seeder-assets/' . Str::slug($shirt->name) . '-' . ($index + 1) . '.' . $extension;
-                    
+
                     Storage::disk('public')->putFileAs(
                         dirname($filename),
                         $photoPath,
                         basename($filename)
                     );
-                    
+
                     ShirtPhoto::create([
                         'shirt_id' => $shirt->id,
                         'photo' => $filename
