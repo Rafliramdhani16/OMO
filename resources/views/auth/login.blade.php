@@ -42,10 +42,39 @@
                     </svg>
                     <span>Memproses...</span>
                 </span>
-                <a href="{{ route('auth.diakun') }}" class=" text-white">DIAKUN</a>
-                <a href="{{ route('auth.diakun') }}" class=" text-white">Google</a>
             </x-auth-button>
             <a href="{{ route('auth.diakun') }}" class="inline-block w-full bg-white text-black">DIAKUN</a>
+            
+            <x-auth-button>
+                <span x-show="!loading" class="flex items-center justify-center space-x-2">
+                    <a href="{{ route('auth.diakun') }}" class="">DIAKUN</a>
+                </span>
+                <span x-show="loading" class="flex items-center justify-center space-x-2">
+                    <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                    <span>Memproses...</span>
+                </span>
+            </x-auth-button>
+            <x-auth-button>
+                <span x-show="!loading" class="flex items-center justify-center space-x-2">
+                </span>
+                <div>
+                    <a href="auth/redirect", class="text-white">Masuk dengan Google</a>
+                </div>
+                <span x-show="loading" class="flex items-center justify-center space-x-2">
+                    <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Memproses...</span>
+                </span>
+            </x-auth-button>
         </form>
 
         <div class="relative">
