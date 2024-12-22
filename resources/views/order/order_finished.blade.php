@@ -140,10 +140,16 @@
                                         {{ $productTransaction->quantity }}
                                     </span>
                                 </div>
-                                {{-- <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-                                    <span class="text-slate-600">Total Pembayaran</span>
-                                    <span class="font-bold text-lg text-slate-900">Rp {{ number_format($productTransaction->total_price, 0, ',', '.') }}</span>
+                                {{-- <div class="pt-4 mt-4 border-t border-slate-100">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-slate-700">Total Pembayaran</span>
+                                        <span class="text-xl font-bold text-slate-900">Rp {{number_format($orderData['grand_total_amount'], 0, ',', '.')}}</span>
+                                    </div>
                                 </div> --}}
+                                <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+                                    <span class="text-slate-600">Total Pembayaran</span>
+                                    <span class="font-bold text-lg text-slate-900">Rp {{ number_format($productTransaction['grand_total_amount'], 0, ',', '.') }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

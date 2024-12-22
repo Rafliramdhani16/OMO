@@ -16,6 +16,8 @@ Route::middleware('guest')->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/forget', [AuthController::class, 'forgetPassword'])->name('forget');
         Route::post('/reset', [AuthController::class, 'resetPassword'])->name('reset');
+        Route::get('/diakun', [AuthController::class, 'redirectDiAkun'])->name('diakun');
+        Route::get('/diakun/callback/{token}', [AuthController::class, 'callbackDiakun']);
     });
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
@@ -26,6 +28,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
         Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
+        
     });
 });
 
