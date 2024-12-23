@@ -34,10 +34,14 @@
             </x-auth-button>
         </form>
 
-        <p class="text-center text-gray-600">
+        <p class="text-center text-gray-600 initial-animate stagger-4">
             Kembali ke 
-            <a href="{{ route('auth.login') }}" class="text-blue-500 hover:text-blue-700 font-medium hover:underline">
-                Halaman Login
+            <a href="{{ route('auth.login') }}"
+                class="text-blue-500 relative group inline-block">
+                <span class="inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:text-blue-600 hover:ml-2">
+                    Halaman Login
+                </span>
+                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
             </a>
         </p>
     </div>
