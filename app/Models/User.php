@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,10 +17,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'fullname',
         'email', 
         'password',
         'image',
+        'role_id',
         'google_id',
         'google_token',
         'google_refresh_token'
@@ -50,10 +51,30 @@ class User extends Authenticatable
         ];
     }
 
-    // ubah image jadi link
+    protected static function booted(): void
+    {
+        static::creating(function ($user) {
+            if (!$user->role_id) {
+                $userRole = Role::where('name', 'user')->first();
+                if ($userRole) {
+                    $user->role_id = $userRole->id;
+                }
+            }
+        });
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->role->name === $roleName;
+    }
+
     public function getImageAttribute($value)
     {
-        // cek kalo diawali dari link tinggal return aja
         if (strpos($value, 'http') === 0) {
             return $value;
         }

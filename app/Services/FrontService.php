@@ -30,4 +30,9 @@ class FrontService
 
         return compact('category', 'popularShirt', 'newShirt');
     }
+    
+    public function getAllShirts()
+    {
+        return $this->shirtRepository->getAllShirts();
+    }
 }

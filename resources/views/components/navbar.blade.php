@@ -102,12 +102,12 @@
                             class="relative flex items-center gap-3 p-2 hover:bg-blue-50 rounded-xl transition-all duration-300 group">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full overflow-hidden ring-2 ring-white shadow-lg transition-all duration-300 group-hover:shadow-indigo-200">
-                                    <img src="{{ Auth::user()->image }}" alt="{{ Auth::user()->name }}" 
+                                    <img src="{{ Auth::user()->image }}" alt="{{ Auth::user()->fullname }}" 
                                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
                                 </div>
                                 <div class="hidden md:block text-left">
                                     <p class="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors duration-300">
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::user()->fullname }}
                                     </p>
                                     <p class="text-xs text-gray-500 line-clamp-1">
                                         {{ Auth::user()->email }}

@@ -32,4 +32,9 @@ class FrontController extends Controller
     {
         return view('front.category', compact('category'));
     }
+    public function allShirts()
+    {
+        $shirts = $this->frontService->getAllShirts();
+        return view('front.shirt-all', compact('shirts'));
+    }
 }
