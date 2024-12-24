@@ -29,7 +29,6 @@
             flex-shrink: 0;
         }
 
-        /* Enhanced Navigation Animation */
         .nav-link {
             @apply relative text-gray-600 hover:text-blue-600 transition-all duration-500;
         }
@@ -132,11 +131,26 @@
             transform: translateY(0);
             opacity: 1;
         }
+        .group:hover .transform {
+            transition-duration: 300ms;
+        }
+
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        [x-show="hoveredItem"] {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
     </style>
     @stack('styles')
 </head>
 
-<body class="bg-gray-50 fade-in" x-data="{
+<body class="bg-white fade-in" x-data="{
     mobileMenuOpen: false,
     searchOpen: false,
     userMenuOpen: false,
