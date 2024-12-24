@@ -13,4 +13,6 @@ interface ShirtRepositoryInterface
     public function find($id);
 
     public function getPrice($ticketId);
+
+    public function getAllShirts();
 }
