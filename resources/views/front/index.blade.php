@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<x-notification />
 <!-- Hero Section -->
 <section class="bg-gradient-to-br from-blue-50 to-indigo-50">
     <div class="max-w-7xl mx-auto px-4 py-16">
@@ -198,5 +199,25 @@
     </div>
     
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if (session()->has('success'))
+            window.dispatchEvent(new CustomEvent('notification', { 
+                detail: { 
+                    message: "{{ session('success') }}", 
+                    type: 'success'
+                }
+            }));
+        @endif
 
+        @if (session()->has('error'))
+            window.dispatchEvent(new CustomEvent('notification', { 
+                detail: { 
+                    message: "{{ session('error') }}", 
+                    type: 'error'
+                }
+            }));
+        @endif
+    });
+</script>
 @endsection

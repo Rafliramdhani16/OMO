@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SocialiteController;
 
 
 Route::middleware('guest')->group(function () {
@@ -16,22 +17,25 @@ Route::middleware('guest')->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/forget', [AuthController::class, 'forgetPassword'])->name('forget');
         Route::post('/reset', [AuthController::class, 'resetPassword'])->name('reset');
+        Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
+        Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
         Route::get('/diakun', [AuthController::class, 'redirectDiAkun'])->name('diakun');
         Route::get('/diakun/callback/{token}', [AuthController::class, 'callbackDiakun']);
     });
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
 });
+
 Route::middleware('auth')->group(function () {
 
     Route::name('auth.')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
         Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
-        
+        Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('changepassword');
+        Route::delete('/profile/delete-photo', [AuthController::class, 'deleteProfilePhoto'])->name('delete_photo');
     });
 });
-
 
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
