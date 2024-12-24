@@ -106,6 +106,12 @@
             <div class="mt-6">
                 @include('components.password-card')
             </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end mt-6 space-x-4">
+                <button type="reset" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 transition duration-200">Cancel</button>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-200">Simpan</button>
+            </div>
         </div>
     </div>
 </div>
@@ -136,3 +142,4 @@ button, a {
 }
 </style>
 @endsection
+
