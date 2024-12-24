@@ -25,15 +25,17 @@ Route::middleware('guest')->group(function () {
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
 });
+
 Route::middleware('auth')->group(function () {
 
     Route::name('auth.')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
         Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
+        Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('changepassword');
+        Route::delete('/profile/delete-photo', [AuthController::class, 'deleteProfilePhoto'])->name('delete_photo');
     });
 });
-
 
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
