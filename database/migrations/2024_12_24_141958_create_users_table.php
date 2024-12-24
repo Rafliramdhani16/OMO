@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -7,17 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('google_id')->nullable();;
-            $table->string('google_token')->nullable();;
+            $table->foreignid('role_id')->references('id')->on('roles');
+            $table->string('google_id')->nullable();
+            $table->string('google_token')->nullable();
             $table->string('google_refresh_token')->nullable();
-            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('fullname');
             $table->string('image');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -42,13 +40,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

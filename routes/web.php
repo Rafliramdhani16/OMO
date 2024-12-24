@@ -5,43 +5,49 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SocialiteController;
-
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('guest')->group(function () {
-
     Route::get('/login?', [AuthController::class, 'showLogin'])->name('login');
+    
     Route::name('auth.')->group(function () {
+
         Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
         Route::post('/login', [AuthController::class, 'login']);
         Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
         Route::post('/register', [AuthController::class, 'register']);
+        
         Route::post('/forget', [AuthController::class, 'forgetPassword'])->name('forget');
         Route::post('/reset', [AuthController::class, 'resetPassword'])->name('reset');
-        Route::get('/auth/redirect', [SocialiteController::class, 'redirect']);
-        Route::get('/auth/google/callback', [SocialiteController::class, 'callback']);
-        Route::get('/diakun', [AuthController::class, 'redirectDiAkun'])->name('diakun');
-        Route::get('/diakun/callback/{token}', [AuthController::class, 'callbackDiakun']);
+        
+        Route::get('/google', [SocialiteController::class, 'redirectToGoogle'])->name('google');
+        Route::get('/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
+        
+        Route::get('/diakun', [SocialiteController::class, 'redirectToDiAkun'])->name('diakun');
+        Route::get('/diakun/callback/{token?}', [SocialiteController::class, 'handleDiAkunCallback']);
     });
+
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
 });
 
 Route::middleware('auth')->group(function () {
-
     Route::name('auth.')->group(function () {
+
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-        Route::get('/profile', [AuthController::class, 'showEditProfile'])->name('profile');
-        Route::post('/profile', [AuthController::class, 'editProfile'])->name('profile');
-        Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('changepassword');
-        Route::delete('/profile/delete-photo', [AuthController::class, 'deleteProfilePhoto'])->name('delete_photo');
+        
+
+        Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+        Route::post('/profile', [ProfileController::class, 'update']);
+        Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('changepassword');
+        Route::delete('/profile/delete-photo', [ProfileController::class, 'removeImage'])->name('delete_photo');
     });
 });
 
-
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
-
 Route::get('/browse/{category:slug}', [FrontController::class, 'category'])->name('front.category');
 Route::get('/details/{shirt:slug}', [FrontController::class, 'details'])->name('front.details');
+
 
 Route::get('/check-booking', [OrderController::class, 'checkBooking'])->name('front.check_booking');
 Route::post('/check-booking/details', [OrderController::class, 'checkBookingDetails'])->name('front.check_booking_details');

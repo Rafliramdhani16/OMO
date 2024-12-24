@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 
 class AuthController extends Controller
@@ -22,11 +20,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validatedData = $request->validate([
-            'email' => 'required|string|email:rfc,dns',
+            'username' => 'required|string',
             'password' => 'required',
         ], [
-            'email.required' => 'Email wajib diisi!',
-            'email.email' => 'Format email tidak valid!',
+            'username.required' => 'Username wajib diisi!',
             'password.required' => 'Password wajib diisi!'
         ]);
 
@@ -35,12 +32,12 @@ class AuthController extends Controller
 
             $user = Auth::user();
             return redirect()->intended('/')
-                ->with('success', "Selamat datang kembali, {$user->name}! 👋");
+                ->with('success', "Selamat datang kembali, {$user->fullname}! 👋");
         }
 
         return back()
-            ->withInput($request->only('email'))
-            ->with('error', 'Email atau password yang Anda masukkan salah. Silakan coba lagi! 🔒');
+            ->withInput($request->only('username'))
+            ->with('error', 'Username atau password yang Anda masukkan salah. Silakan coba lagi! 🔒');
     }
 
     public function showRegister()
@@ -51,13 +48,20 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users|alpha_dash',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email:rfc,dns|max:255|unique:users',
             'password' => 'required|string|min:8',
             'password2' => 'required|string|min:8|same:password',
         ], [
-            'name.required' => 'Nama wajib diisi!',
-            'name.max' => 'Nama terlalu panjang!',
+            'username.required' => 'Username wajib diisi!',
+            'username.unique' => 'Username sudah digunakan!',
+            'username.alpha_dash' => 'Username hanya boleh berisi huruf, angka, dash dan underscore!',
+            'firstname.required' => 'Nama depan wajib diisi!',
+            'firstname.max' => 'Nama depan terlalu panjang!',
+            'lastname.required' => 'Nama belakang wajib diisi!',
+            'lastname.max' => 'Nama belakang terlalu panjang!',
             'email.required' => 'Email wajib diisi!',
             'email.email' => 'Format email tidak valid!',
             'email.unique' => 'Email sudah terdaftar!',
@@ -66,8 +70,9 @@ class AuthController extends Controller
             'password2.same' => 'Konfirmasi password tidak cocok!'
         ]);
 
+        $validatedData['fullname'] = $validatedData['firstname'] . ' ' . $validatedData['lastname'];
         $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['image'] = 'https://ui-avatars.com/api/?name=' . urlencode($validatedData['name']) . '&background=random&color=ffffff';
+        $validatedData['image'] = 'https://ui-avatars.com/api/?name=' . urlencode($validatedData['fullname']) . '&background=random&color=ffffff';
 
         User::create($validatedData);
 
@@ -78,7 +83,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $name = Auth::user()->name;
+        $fullname = Auth::user()->fullname;
 
         Auth::logout();
         $request->session()->invalidate();
@@ -86,7 +91,7 @@ class AuthController extends Controller
 
         return redirect()
             ->route('front.index')
-            ->with('success', "Sampai jumpa kembali, {$name}! 👋");
+            ->with('success', "Sampai jumpa kembali, {$fullname}! 👋");
     }
 
     public function showForgetPassword()
@@ -151,87 +156,5 @@ class AuthController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('auth.login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
-    }
-
-    public function showEditProfile()
-    {
-        return view('auth.editprofile', [
-            'user' => Auth::user()
-        ]);
-    }
-
-    public function editProfile(Request $request)
-    {
-
-        $rules = [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email:rfc,dns|max:255',
-        ];
-
-        if ($request->file('image')) {
-            $rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
-        }
-
-        $validatedData = $request->validate($rules);
-
-        if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('avatar');
-        }
-
-        User::where('id', Auth::user()->id)->update($validatedData);
-        return redirect()->route('auth.profile')->with('success', 'Profile berhasil diubah');
-    }
-
-
-    public function redirectDiAkun()
-    {
-        return redirect()->to("https://sso.bhadrikais.my.id/signin/" . env('TOKEN_DIAKUN'));
-    }
-
-
-    public function callbackDiakun(string $token = null, Request $request)
-    {
-        if ($token !== null) {
-            try {
-                $client = new Client();
-                $api = $client->request('POST', 'https://sso.bhadrikais.my.id/otentikasi/login/' . env('TOKEN_DIAKUN'), [
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer ' . $token,
-                    ]
-                ]);
-                $json = json_decode($api->getBody(), true);
-                return $this->loggingIn('diakun', $json);
-            } catch (Exception $e) {
-                return back()->with('error', "Something wrong!");
-            }
-        }
-        return redirect('/login');
-    }
-
-    public function loggingIn(string $app, $data)
-    {
-        if ($data && $app) {
-            if (strtolower($app) == 'diakun') {
-                $data = [
-                    'name' => $data['data']['fullname'],
-                    'image' => $data['data']['image'],
-                    'email' => $data['data']['email'],
-                    'password' => Hash::make('password' . $data['data']['email'] . $data['data']['uuid'] . time()),
-                ];
-            }
-
-
-            $user = User::firstOrCreate([
-                'email' => $data['email'],
-            ], $data);
-
-            Auth::login($user);
-            $user = Auth::user();
-            return redirect()->intended('/')
-                ->with('success', "Selamat datang kembali, {$user->name}! 👋");
-        }
-
-        return back()->with('error', "Something wrong!");
     }
 }
