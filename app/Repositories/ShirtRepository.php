@@ -7,6 +7,7 @@ use App\Repositories\Contracts\ShirtRepositoryInterface;
 
 class ShirtRepository implements ShirtRepositoryInterface
 {
+    // Method yang sudah ada tetap sama
     public function getPopularShirt($limit = 4)
     {
         return Shirt::where('is_popular', true)->take($limit)->get();
@@ -30,5 +31,11 @@ class ShirtRepository implements ShirtRepositoryInterface
     {
         $shirt = $this->find($shirtId);
         return $shirt ? $shirt->price : 0;
+    }
+
+    // Tambahkan method baru
+    public function getAllShirts()
+    {
+        return Shirt::paginate(12); 
     }
 }
