@@ -1,3 +1,4 @@
+
 <div x-data="{ 
     isExpanded: true,
     isMobile: window.innerWidth < 768,
@@ -105,43 +106,6 @@
                     class="absolute left-full ml-3 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap z-50"
                     style="top: 50%; transform: translateY(-50%)">
                     Edit Profile
-                </div>
-            </div>
-
-            <div class="relative group" 
-                @mouseover="isMobile && !isExpanded ? hoveredItem = 'password' : null" 
-                @mouseleave="hoveredItem = null">
-                <a href="{{ route('auth.changepassword') }}"
-                    class="flex items-center group px-3 py-2.5 rounded-xl transition-all duration-300"
-                    :class="{ 
-                        'justify-center': isMobile && !isExpanded,
-                        'bg-blue-50 text-blue-600': activeRoute.includes('/password'),
-                        'hover:bg-gray-50 text-gray-600 hover:text-blue-600': !activeRoute.includes('/password')
-                    }">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 transform group-hover:scale-110"
-                        :class="{ 
-                            'bg-blue-50 text-blue-600': activeRoute.includes('/password'),
-                            'text-gray-500 group-hover:text-blue-600': !activeRoute.includes('/password')
-                        }">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
-                                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
-                        </svg>
-                    </div>
-                    <span class="ml-3 font-medium truncate" 
-                        x-show="!isMobile || isExpanded" 
-                        x-transition>Ganti Password</span>
-                </a>
-                <div x-show="hoveredItem === 'password' && !isExpanded && isMobile"
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 translate-x-2"
-                    x-transition:enter-end="opacity-100 translate-x-0"
-                    x-transition:leave="transition ease-in duration-200"
-                    x-transition:leave-start="opacity-100 translate-x-0"
-                    x-transition:leave-end="opacity-0 translate-x-2"
-                    class="absolute left-full ml-3 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg whitespace-nowrap z-50"
-                    style="top: 50%; transform: translateY(-50%)">
-                    Ganti Password
                 </div>
             </div>
         </nav>

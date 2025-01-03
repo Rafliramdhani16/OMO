@@ -39,8 +39,7 @@
                         <p class="mt-2 text-sm text-gray-500">ID pemesanan dapat ditemukan di email konfirmasi Anda</p>
                     </div>
 
-                    {{-- Phone field commented out as in original --}}
-
+                    
                     <button type="submit" 
                             class="w-full bg-blue-600 text-white font-medium py-3 px-4 rounded-xl 
                             transform transition-all duration-300 
