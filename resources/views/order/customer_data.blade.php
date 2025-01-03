@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class=" bg-gradient-to-br from-gray-50 to-blue-50/30">
+<div class=" bg-gradient-to-br from-gray-50 to-blue-50/30 h-screen">
     <div class="max-w-7xl mx-auto px-4 py-8 ">
         <div class="flex items-center justify-between mb-8">
             <div>
@@ -47,7 +47,7 @@
                     </div>
 
                     <!-- Shipping Form -->
-                    <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-slate-300 transition-all duration-300 shadow-sm">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-slate-300 transition-all duration-300 shadow-sm mt-6">
                         <div class="space-y-6">
                             <!-- Address -->
                             <div>

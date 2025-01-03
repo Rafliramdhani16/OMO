@@ -136,9 +136,9 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
         @forelse ($newShirt->take(6) as $itemNewShirt)
-        <a href="{{ route('front.details', $itemNewShirt->slug) }}" class="group">
+        <a href="{{ route('front.details', $itemNewShirt->slug) }}" class="group border border-slate-200 rounded-xl">
             <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex h-40">
                 <div class="w-40 flex-shrink-0">
                     <div class="aspect-square relative">

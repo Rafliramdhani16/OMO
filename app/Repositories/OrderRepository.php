@@ -13,10 +13,9 @@ class OrderRepository implements OrderRepositoryInterface
         return ProductTransaction::create($data);
     }
 
-    public function findByTrxIdAndPhoneNumber($bookingTrxId, $phoneNumber)
+    public function findByTrxIdAndPhoneNumber($bookingTrxId)
     {
         return ProductTransaction::where('booking_trx_id', $bookingTrxId)
-            ->where('phone', $phoneNumber)
             ->first();
     }
 

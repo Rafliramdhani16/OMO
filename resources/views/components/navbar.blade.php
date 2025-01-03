@@ -1,5 +1,3 @@
-
-<!-- resources/views/components/navbar.blade.php -->
 <div class="relative z-50" x-data="{ 
     mobileMenuOpen: false,
     searchOpen: false,
@@ -33,24 +31,6 @@
                 <a href="{{ route('front.index') }}" class="group flex items-center space-x-2">
                     <img src="{{ asset('image/LOGOOMO.png') }}" alt="" class="w-15 h-10">
                 </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('front.index') }}"
-                        class="nav-link text-md font-medium text-gray-700 hover:text-blue-600 transform hover:scale-110 transition-all duration-300 {{ request()->routeIs('front.index') ? 'text-blue-600' : '' }}">
-                        Beranda
-                    </a>
-                    <a href="#"
-                        class="nav-link text-md font-medium text-gray-700 hover:text-blue-600 transform hover:scale-110 transition-all duration-300 {{ request()->routeIs('front.category') ? 'text-blue-600' : '' }}">
-                        Kategori
-                    </a>
-                    <a href="#"
-                        class="nav-link text-md font-medium text-gray-700 hover:text-blue-600 transform hover:scale-110 transition-all duration-300 {{ request()->routeIs('front.support') ? 'text-blue-600' : '' }}">
-                        Bantuan
-                    </a>
-                </div>
-                
-                             
 
                 <!-- Right Side Icons -->
                 <div class="flex items-center gap-4">
@@ -180,116 +160,161 @@
                         </div>
                     </div>
                     @endauth
-
-                    <!-- Mobile Menu Button -->
-                    <button @click="mobileMenuOpen = !mobileMenuOpen"
-                        class="md:hidden p-2 hover:bg-blue-50 rounded-full transition-all duration-300">
-                        <svg x-show="!mobileMenuOpen" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg x-show="mobileMenuOpen" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div x-show="mobileMenuOpen" 
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 -translate-y-4" 
-                x-transition:enter-end="opacity-100 translate-y-0"
-                x-transition:leave="transition ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0"
-                x-transition:leave-end="opacity-0 -translate-y-4"
-                class="md:hidden border-t bg-white">
-                <div class="px-4 py-3 space-y-1">
-                    <a href="{{ route('front.index') }}"
-                        class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl transition-all duration-300 {{ request()->routeIs('front.index') ? 'text-blue-600 bg-blue-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        <span>Beranda</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl transition-all duration-300 {{ request()->routeIs('front.category') ? 'text-blue-600 bg-blue-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        <span>Kategori</span>
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-4 py-3 text-sm rounded-xl transition-all duration-300 {{ request()->routeIs('front.support') ? 'text-blue-600 bg-blue-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>Bantuan</span>
-                    </a>
-
-                    @guest
-                    <div class="mt-4 grid grid-cols-2 gap-2 px-4">
-                        <a href="{{ route('auth.login') }}"
-                            class="flex items-center justify-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:text-blue-600 rounded-xl border border-gray-200 hover:border-blue-100 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105">
-                            Masuk
-                        </a>
-                        <a href="{{ route('auth.register') }}"
-                            class="flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-200">
-                            Daftar
-                        </a>
-                    </div>
-                    @endguest
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Search Overlay -->
-    <div x-show="searchOpen" 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        @keydown.escape="searchOpen = false"
-        class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
-        <div class="container mx-auto px-4 pt-24" @click.away="searchOpen = false">
-            <div class="bg-white rounded-2xl p-6 shadow-xl max-w-2xl mx-auto transform transition-all"
-                x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4"
-                x-transition:enter-end="opacity-100 translate-y-0">
-                <form @submit.prevent="handleSearch" class="relative">
-                    <div class="flex items-center gap-3">
-                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input type="text" 
-                            x-ref="searchInput"
-                            x-model="searchQuery"
-                            class="w-full text-sm outline-none placeholder-gray-400" 
-                            placeholder="Cari produk fashion kesukaanmu..."
-                            @keydown.enter="handleSearch">
-                        <button type="button"
-                            @click="searchOpen = false" 
-                            class="p-2 hover:bg-gray-100 rounded-xl transition-all duration-300">
-                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<!-- Search Overlay -->
+        <div x-show="searchOpen" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            @keydown.escape="searchOpen = false"
+            class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            x-data="{ 
+                searchQuery: '',
+                searchResults: [],
+                isLoading: false,
+                
+                async performSearch() {
+                    if (this.searchQuery.length < 2) {
+                        this.searchResults = [];
+                        return;
+                    }
+                    
+                    this.isLoading = true;
+                    try {
+                        const response = await fetch(`/search?query=${encodeURIComponent(this.searchQuery)}`);
+                        const data = await response.json();
+                        this.searchResults = data;
+                    } catch (error) {
+                        console.error('Search error:', error);
+                        this.searchResults = [];
+                    }
+                    this.isLoading = false;
+                },
+
+                goToProduct(url) {
+                    window.location.href = url;
+                    this.searchOpen = false;
+                }
+            }">
+            
+            <div class="container mx-auto px-4 pt-24" @click.away="searchOpen = false">
+                <div class="bg-white rounded-2xl p-6 shadow-xl max-w-2xl mx-auto transform transition-all"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4"
+                    x-transition:enter-end="opacity-100 translate-y-0">
+                    
+                    <!-- Search Input -->
+                    <div class="relative">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M6 18L18 6M6 6l12 12" />
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
-                        </button>
+                            <input type="text" 
+                                x-ref="searchInput"
+                                x-model="searchQuery"
+                                @input.debounce.300ms="performSearch()"
+                                class="w-full text-sm outline-none placeholder-gray-400" 
+                                placeholder="Cari produk fashion kesukaanmu...">
+                            <button type="button"
+                                @click="searchOpen = false" 
+                                class="p-2 hover:bg-gray-100 rounded-xl transition-all duration-300">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Loading Indicator -->
+                        <div x-show="isLoading" class="flex justify-center py-8">
+                            <div class="flex items-center justify-center space-x-2 text-blue-600">
+                                <div class="w-2 h-2 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                                <div class="w-2 h-2 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                <div class="w-2 h-2 rounded-full animate-bounce"></div>
+                            </div>
+                        </div>
+
+                        <!-- Search Results -->
+                        <div x-show="!isLoading && searchResults.length > 0" 
+                            class="mt-4 divide-y divide-gray-100 max-h-[60vh] overflow-y-auto">
+                            <template x-for="product in searchResults" :key="product.id">
+                                <div class="group cursor-pointer" @click="goToProduct(product.url)">
+                                    <div class="flex items-center gap-4 p-4 hover:bg-blue-50 transition-all duration-300 rounded-xl">
+                                        <!-- Product Image -->
+                                        <div class="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
+                                            <img :src="'/storage/' + product.thumbnail" 
+                                                :alt="product.name"
+                                                class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                                        </div>
+
+                                        <!-- Product Info -->
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center gap-2">
+                                                <h4 class="text-sm font-medium text-gray-900 truncate group-hover:text-blue-600 transition-colors" 
+                                                    x-text="product.name"></h4>
+                                                <!-- Popular Badge -->
+                                                <span x-show="product.is_popular" 
+                                                    class="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                    Popular
+                                                </span>
+                                            </div>
+
+                                            <!-- Brand & Category -->
+                                            <div class="flex items-center gap-2 mt-1">
+                                                <span x-show="product.brand" 
+                                                    class="text-xs text-gray-500"
+                                                    x-text="product.brand"></span>
+                                                <span x-show="product.brand && product.category" 
+                                                    class="text-xs text-gray-300">•</span>
+                                                <span class="text-xs text-gray-500" 
+                                                    x-text="product.category"></span>
+                                            </div>
+
+                                            <!-- Price & Stock -->
+                                            <div class="flex items-center justify-between mt-1">
+                                                <p class="text-sm font-medium text-blue-600">
+                                                    Rp <span x-text="new Intl.NumberFormat('id-ID').format(product.price)"></span>
+                                                </p>
+                                                <span class="text-xs text-gray-500">
+                                                    Stock: <span x-text="product.stock"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Arrow Icon -->
+                                        <div class="text-gray-400 group-hover:text-blue-600 transform group-hover:translate-x-1 transition-all">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- No Results -->
+                        <div x-show="!isLoading && searchQuery.length >= 2 && searchResults.length === 0" 
+                            class="py-8 text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-500 text-sm">Tidak ada hasil yang ditemukan untuk pencarian ini.</p>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
 
     <!-- Logout Confirmation Modal -->
     <div x-show="showLogoutConfirm" 
@@ -316,31 +341,32 @@
                 @click.away="showLogoutConfirm = false">
                 
                 <!-- Logout Icon -->
-                <div class="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600 mb-4">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                </div>
+<!-- Dialog Content (continuation) -->
+<div class="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600 mb-4">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+    </svg>
+</div>
 
-                <!-- Content -->
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">
-                    Konfirmasi Keluar
-                </h3>
-                <p class="text-sm text-gray-500 mb-6">
-                    Apakah Anda yakin ingin keluar dari akun ini?
-                </p>
+<!-- Content -->
+<h3 class="text-lg font-semibold text-gray-900 mb-2">
+    Konfirmasi Keluar
+</h3>
+<p class="text-sm text-gray-500 mb-6">
+    Apakah Anda yakin ingin keluar dari akun ini?
+</p>
 
-                <!-- Buttons -->
-                <div class="flex gap-3">
-                    <button @click="showLogoutConfirm = false"
-                        class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all duration-300">
-                        Batal
-                    </button>
-                    <a href="{{ route('auth.logout') }}"
-                        class="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700 transition-all duration-300 hover:shadow-lg hover:shadow-red-200">
-                        Ya, Keluar
-                    </a>
+<!-- Buttons -->
+<div class="flex gap-3">
+    <button @click="showLogoutConfirm = false"
+        class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all duration-300">
+        Batal
+    </button>
+    <a href="{{ route('auth.logout') }}"
+        class="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700 transition-all duration-300 hover:shadow-lg hover:shadow-red-200">
+        Ya, Keluar
+    </a>
                 </div>
             </div>
         </div>
@@ -349,49 +375,36 @@
 
 <!-- Animations Style -->
 <style>
-    .nav-link {
-        @apply relative text-gray-600 hover:text-blue-600 transition-all duration-500;
-    }
+@keyframes slideDown {
+0% {
+opacity: 0;
+transform: translateY(-8px) scale(0.95);
+}
+70% {
+transform: translateY(2px) scale(1.01);
+}
+100% {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+}
 
-    .nav-link::after {
-        content: '';
-        @apply absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-0.5 bg-blue-600 transition-all duration-500 ease-in-out;
-    }
+@keyframes slideUp {
+0% {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+100% {
+opacity: 0;
+transform: translateY(-8px) scale(0.95);
+}
+}
 
-    .nav-link:hover::after {
-        @apply w-full;
-    }
+.dropdown-enter {
+animation: slideDown 0.4s ease-out forwards;
+}
 
-    @keyframes slideDown {
-        0% {
-            opacity: 0;
-            transform: translateY(-8px) scale(0.95);
-        }
-        70% {
-            transform: translateY(2px) scale(1.01);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
-
-    @keyframes slideUp {
-        0% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: translateY(-8px) scale(0.95);
-        }
-    }
-
-    .dropdown-enter {
-        animation: slideDown 0.4s ease-out forwards;
-    }
-
-    .dropdown-leave {
-        animation: slideUp 0.3s ease-in forwards;
-    }
+.dropdown-leave {
+animation: slideUp 0.3s ease-in forwards;
+}
 </style>
