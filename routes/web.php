@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialiteController;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login?', [AuthController::class, 'showLogin'])->name('login');
@@ -63,3 +64,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/order/payment/confirm', [OrderController::class, 'paymentConfirm'])->name('front.payment_confirm');
 
     Route::get('/order/finished/{productTransaction:id}', [OrderController::class, 'orderFinished'])->name('front.order_finished');
+
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/orders/{productTransaction}/pdf', [OrderController::class, 'downloadPdf'])->name('orders.pdf');

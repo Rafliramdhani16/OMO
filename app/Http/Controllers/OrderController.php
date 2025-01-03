@@ -10,7 +10,6 @@ use App\Models\ProductTransaction;
 use App\Models\Shirt;
 use App\Models\ShirtSize;
 use App\Services\OrderService;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -33,6 +32,7 @@ class OrderController extends Controller
 
         return redirect()->route('front.booking', $shirt->slug);
     }
+
     public function booking()
     {
         $data = $this->orderService->getOrderDetails();
@@ -70,10 +70,9 @@ class OrderController extends Controller
         return redirect()->route('front.index')->withErrors(['error' => 'Payment failed. Please try again']);
     }
 
-    public function orderFinished(ProductTransaction $productTransaction )
+    public function orderFinished(ProductTransaction $productTransaction)
     {
         return view('order.order_finished', compact('productTransaction'));
-        
     }
 
     public function checkBooking()
@@ -91,5 +90,11 @@ class OrderController extends Controller
         }
 
         return redirect()->route('front.check_booking')->withErrors(['error' => 'Transaction not found']);
+    }
+
+    public function downloadPdf(ProductTransaction $productTransaction)
+    {
+        $pdf = $this->orderService->generateOrderPdf($productTransaction);
+        return $pdf->download('order_report_' . $productTransaction->booking_trx_id . '.pdf');
     }
 }
