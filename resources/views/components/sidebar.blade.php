@@ -1,3 +1,4 @@
+
 <div x-data="{ 
     isExpanded: true,
     isMobile: window.innerWidth < 768,
