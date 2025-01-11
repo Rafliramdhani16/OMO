@@ -32,9 +32,9 @@
                 <div class="relative group">
                     <div class="aspect-[4/3] rounded-2xl bg-white shadow-lg overflow-hidden">
                         <img id="mainImage" 
-                             src="{{ asset('storage/' . $shirt->thumbnail) }}"
-                             class="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500" 
-                             alt="{{ $shirt->name }}">
+                            src="{{ asset('storage/' . $shirt->thumbnail) }}"
+                            class="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500" 
+                            alt="{{ $shirt->name }}">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <!-- Zoom Icon -->
@@ -51,8 +51,8 @@
                     <button onclick="updateMainImage('{{ asset('storage/' . $photo->photo) }}')"
                             class="relative aspect-square rounded-lg overflow-hidden hover:ring-2 ring-blue-600 transition-all duration-300 transform hover:scale-105">
                         <img src="{{ asset('storage/' . $photo->photo) }}" 
-                             class="w-full h-full object-cover" 
-                             alt="{{ $shirt->name }}">
+                            class="w-full h-full object-cover" 
+                            alt="{{ $shirt->name }}">
                         <div class="absolute inset-0 bg-black/5 hover:bg-black/0 transition-colors"></div>
                     </button>
                     @endforeach
@@ -92,8 +92,8 @@
                         <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
                             <div class="w-16 h-16 bg-white rounded-lg overflow-hidden p-2 shadow-sm">
                                 <img src="{{ asset('storage/' . $shirt->brand->logo) }}"
-                                     class="w-full h-full object-contain" 
-                                     alt="{{ $shirt->brand->name }}">
+                                    class="w-full h-full object-contain" 
+                                    alt="{{ $shirt->brand->name }}">
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Official Store</p>
