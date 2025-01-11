@@ -63,7 +63,6 @@ class OrderController extends Controller
     {
         $validated = $request->validated();
         $productTransactionId = $this->orderService->paymentConfirm($validated);
-
         if ($productTransactionId) {
             return redirect()->route('front.order_finished', $productTransactionId);
         }

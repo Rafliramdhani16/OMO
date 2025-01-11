@@ -8,7 +8,7 @@
         </div>
 
         <form method="POST" action="{{ route('auth.forget') }}" class="space-y-4"
-              @submit="loading = true">
+            @submit="loading = true">
             @csrf
             
             <div>
