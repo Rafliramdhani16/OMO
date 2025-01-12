@@ -30,7 +30,7 @@
                             </div>
                             <div>
                                 <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-3">Terima Kasih, {{ Auth::user()->name }}! 🎉</h1>
-                                <p class="text-slate-600">Pesanan Anda telah berhasil dibuat dan tim kami akan segera memprosesnya dengan penuh perhatian.</p>
+                                <p class="text-slate-600">Pesanan Anda telah berhasil dibuat dan tim kami akan segera memprosesnya dengan penuh perhatian. Bukti pembayaran akan dikirim ke email yang telah terdaftar</p>
                             </div>
                         </div>
                     </div>
