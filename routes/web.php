@@ -31,7 +31,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/forget', [AuthController::class, 'showForgetPassword'])->name('password.request');
     Route::get('/reset', [AuthController::class, 'showResetPassword'])->name('password.reset');
 });
-// Routes untuk admin
+
 
 Route::middleware('auth')->group(function () {
     Route::name('auth.')->group(function () {
