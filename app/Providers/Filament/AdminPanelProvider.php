@@ -5,11 +5,11 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
+use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Navigation\MenuItem;
+use Filament\Pages;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -18,7 +18,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Resources\UserResource;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,15 +29,34 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'danger' => Color::Rose,
                 'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Blue,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->resources([
-                UserResource::class,
-            ])
-            ->pages([
-                Pages\Dashboard::class,
+            ->font('Inter')
+            ->brandName('Dashboard')
+            ->darkMode()
+            ->sidebarCollapsibleOnDesktop()
+            ->topNavigation(false)
+            ->breadcrumbs()
+            ->maxContentWidth('full')
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Profil')
+                    ->url('/admin/profile')
+                    ->icon('heroicon-o-user-circle'),
+                MenuItem::make()
+                    ->label('Lihat Website')
+                    ->url('/')
+                    ->icon('heroicon-o-globe-alt')
+                    ->openUrlInNewTab(),
+                'logout' => MenuItem::make()
+                    ->label('Keluar')
+                    ->url('/logout')
+                    ->icon('heroicon-o-arrow-right-on-rectangle'),
             ])
             ->widgets([
                 Widgets\AccountWidget::class,
@@ -57,12 +75,11 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->userMenuItems([
-                MenuItem::make()
-                    ->label('Back to Site')
-                    ->url('/')
-                    ->icon('heroicon-o-home')
-            ])
-            ->maxContentWidth('full');
+            ->sidebarWidth('240px')
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->pages([
+                Pages\Dashboard::class,
+            ]);
     }
 }
