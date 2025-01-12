@@ -8,6 +8,7 @@ use App\Repositories\Contracts\ReportRepositoryInterface;
 use App\Repositories\Contracts\ShirtRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\PromoCodeRepositoryInterface;
+use App\Repositories\ReportRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -24,7 +25,7 @@ class OrderService
         CategoryRepositoryInterface $categoryRepository,
         OrderRepositoryInterface $orderRepository,
         ShirtRepositoryInterface $shirtRepository,
-        ReportRepositoryInterface $reportRepository
+        ReportRepository $reportRepository
     ) {
         $this->categoryRepository = $categoryRepository;
         $this->promoCodeRepository = $promoCodeRepository;
@@ -122,7 +123,7 @@ class OrderService
                 $validated['booking_trx_id'] = ProductTransaction::generateUniqueTrxId();
 
                 $newTransaction = $this->orderRepository->createTransaction($validated);
-                
+
                 // Generate and send PDF
                 $pdf = $this->reportRepository->generateOrderPdf($newTransaction);
                 $this->reportRepository->sendOrderReport($newTransaction->email, $newTransaction, $pdf);
