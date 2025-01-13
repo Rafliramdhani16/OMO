@@ -1,6 +1,6 @@
 ---
 # **OMO (Oh My Outfit)**
-OMO, singkatan dari **Oh My Outfit**, adalah toko online modern untuk berbelanja fashion terkini. Dengan desain yang responsif menggunakan **Tailwind CSS**, OMO menghadirkan pengalaman belanja yang cepat, aman, dan elegan untuk pengguna dari berbagai perangkat.
+OMO, singkatan dari **Oh My Outfit**, adalah toko online modern untuk berbelanja fashion terkini. Dengan desain yang responsif menggunakan **Tailwind CSS**, OMO menghadirkan pengalaman belanja yang cepat, aman, dan elegan untuk pengguna dari berbagai perangkat. Link website https://omo.rafligg.my.id/
 ---
 
 ## **Fitur Utama**
